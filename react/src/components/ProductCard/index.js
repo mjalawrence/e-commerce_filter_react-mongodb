@@ -1,6 +1,7 @@
 import './ProductCard.scss'
 
 const ProductCard = ({title, price, image}) => {
+
     return (
         <>
             <div className="product_card">

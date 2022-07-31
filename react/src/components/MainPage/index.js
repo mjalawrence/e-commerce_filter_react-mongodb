@@ -7,11 +7,6 @@ function MainPage() {
     const [activeCategoryFilter, setActiveCategoryFilter] = useState([])
     const [activeCharacterFilter, setActiveCharacterFilter] = useState([])
 
-    // const resetFilters = () => {
-    //     setActiveCategoryFilter('')
-    //     setActiveCharacterFilter('')
-    // }
-
     return (
         <div className="main">
             <SideBar
@@ -19,7 +14,6 @@ function MainPage() {
                 activeCategoryFilter={activeCategoryFilter}
                 setActiveCharacterFilter={setActiveCharacterFilter}
                 activeCharacterFilter={activeCharacterFilter}
-                // resetFilters={resetFilters}
             />
             <ProductPage
                 activeCategoryFilter={activeCategoryFilter}

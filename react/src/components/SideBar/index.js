@@ -1,12 +1,13 @@
 import Filter from '../Filter'
 import ResetFilterButton from '../ResetFilterButton'
+import {useState, useEffect} from "react";
+import {useRef} from "react";
 
 
-const SideBar = ({setActiveCategoryFilter, activeCategoryFilter, setActiveCharacterFilter, activeCharacterFilter, resetFilters}) => {
+const SideBar = ({setActiveCategoryFilter, activeCategoryFilter, setActiveCharacterFilter, activeCharacterFilter}) => {
 
-
-    // console.log(activeCategoryFilter)
-    // console.log(activeCharacterFilter)
+    // const [uncheckAll, setUncheckAll] = useState([])
+    const refs = useRef([])
 
     return (
         <div>
@@ -14,16 +15,23 @@ const SideBar = ({setActiveCategoryFilter, activeCategoryFilter, setActiveCharac
                 searchType="category"
                 setActiveCategoryFilter={setActiveCategoryFilter}
                 activeCategoryFilter={activeCategoryFilter}
-
+                filterRef={refs}
+                // uncheckAll={uncheckAll}
             />
             <Filter
                 searchType="character"
                 setActiveCharacterFilter={setActiveCharacterFilter}
                 activeCharacterFilter={activeCharacterFilter}
+                // uncheckAll={uncheckAll}
+                filterRef={refs}
             />
             <ResetFilterButton
-                resetFilters={resetFilters}/>
-            <br></br>
+                setActiveCategoryFilter={setActiveCategoryFilter}
+                setActiveCharacterFilter={setActiveCharacterFilter}
+                // setUncheckAll={setUncheckAll}
+                refProp={refs}
+            />
+
 
             {/*<div> search by:</div>*/}
             {/*<input type="radio" name="key" value="key" />*/}
@@ -33,11 +41,8 @@ const SideBar = ({setActiveCategoryFilter, activeCategoryFilter, setActiveCharac
 
             <h1>Stretch Goals</h1>
             <ol>
-                <li>sort out API to return category and character properly</li>
-                <br></br>
-                <li>push mongo to git repo, currently just react stuff</li>
-                <br></br>
-                <li>be able to uncheck selection without refreshing</li>
+
+                <li>make reset filters work</li>
                 <br></br>
                 <li>be able to search specific item in the search bar</li>
                 <ul>

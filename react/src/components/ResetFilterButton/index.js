@@ -1,17 +1,33 @@
-const ResetFilterButton = ({resetFilters}) => {
+const ResetFilterButton = ({setActiveCategoryFilter, setActiveCharacterFilter, refProp, setUncheckAll}) => {
 
-    // const reset_button = document.querySelectorAll(".reset_filters")
-    // reset_button.addEventListener('change', resetFilter)
-    //     function resetFilter() {
+    const setActiveFilters = () => {
+        setActiveCategoryFilter([])
+        setActiveCharacterFilter([])
+    }
 
-        //     const character_radios = document.querySelectorAll(".category")
-        //     character_radios.forEach(character_radio => {
-        //         character_radio.checked = false
-        //         console.log('itlives')
-        //     })
-        // }
+
+    const resetFilters = () => {
+        refProp.current.map((filter_div, index) =>
+        {
+            filter_div.checked = false
+            // console.log(filter_div)
+            // console.log(filter_div.checked)
+            console.log(refProp)
+            console.log(refProp.current)
+        })
+        setActiveFilters()
+    }
+
+    console.log(refProp)
+
             return (
-                <a href='#' className='reset_filters' onClick={resetFilters}>Reset Filters</a>
+                <a
+                    href='#'
+                    className='reset_filters'
+                    onClick={resetFilters}
+                >
+                    Reset Filters
+                </a>
             )
 }
 
