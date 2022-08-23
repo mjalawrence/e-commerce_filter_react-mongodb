@@ -18,7 +18,6 @@ function MainPage() {
             <ProductPage
                 activeCategoryFilter={activeCategoryFilter}
                 activeCharacterFilter={activeCharacterFilter}
-
             />
         </div>
     );

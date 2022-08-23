@@ -1,34 +1,31 @@
-const ResetFilterButton = ({setActiveCategoryFilter, setActiveCharacterFilter, refProp, setUncheckAll}) => {
+const ResetFilterButton = ({setActiveCategoryFilter, setActiveCharacterFilter, categoryRefs, characterRefs}) => {
 
     const setActiveFilters = () => {
         setActiveCategoryFilter([])
         setActiveCharacterFilter([])
     }
 
-
     const resetFilters = () => {
-        refProp.current.map((filter_div, index) =>
+        categoryRefs.current.map((filter_div) =>
         {
             filter_div.checked = false
-            // console.log(filter_div)
-            // console.log(filter_div.checked)
-            console.log(refProp)
-            console.log(refProp.current)
+        })
+        characterRefs.current.map((filter_div) =>
+        {
+            filter_div.checked = false
         })
         setActiveFilters()
     }
 
-    console.log(refProp)
-
-            return (
-                <a
-                    href='#'
-                    className='reset_filters'
-                    onClick={resetFilters}
-                >
-                    Reset Filters
-                </a>
-            )
+    return (
+        <a
+            href='#'
+            className='reset_filters'
+            onClick={resetFilters}
+        >
+            Reset Filters
+        </a>
+    )
 }
 
 export default ResetFilterButton

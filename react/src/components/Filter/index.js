@@ -27,7 +27,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
         }
     }, [filterList])
 
-        //onChange event lifts state of checked filters
+        //onChange event of ticking a checkbox lifts state of checked filter and the api responds accordingly by displaying relevant products
     const filterChange = (e) => {
         const selectedValue = e.currentTarget.value
         if (e.currentTarget.name === 'category') {
@@ -46,26 +46,6 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
             }
         }
     }
-
-    // const ref = useRef([])
-    //
-    // const resetFilters = () => {
-    //     ref.current.map((filter_div, index) =>
-    //         {
-    //             console.log(filter_div.checked)
-    //             filter_div.checked = false
-    //             console.log(ref)
-    //             console.log(ref.current)
-    //             console.log(filter_div)
-    //
-    //         })
-    //     setActiveCharacterFilter([])
-    //     setActiveCategoryFilter([])
-    // }
-
-    //https://bobbyhadz.com/blog/react-check-if-checkbox-is-checked
-
-
 
         //returns filter lists
     useEffect(() => {
@@ -89,21 +69,12 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
         }
     },[capsFilterTitle])
 
-    // console.log(filterRef)
-
     return (
         <div className="side_bar_text">
             <div className="title">
                 {capsFilterTitle}
             </div>
             {filterDivs}
-            {/*<a*/}
-            {/*    href='#'*/}
-            {/*    className='reset_filters'*/}
-            {/*    onClick={resetFilters}*/}
-            {/*>*/}
-            {/*    Reset Filters*/}
-            {/*</a>*/}
         </div>
     )
 
