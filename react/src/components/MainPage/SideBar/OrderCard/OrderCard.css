@@ -1,0 +1,28 @@
+.cart_box {
+  border: solid 1px white;
+  text-align: left;
+  padding: 10px;
+  margin: 10px;
+  background-color: black; }
+
+.cart_title {
+  text-align: center;
+  font-size: 25px; }
+
+.order_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 8px 0; }
+
+.qty_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  float: right; }
+
+.price_box {
+  padding: 0 5px 0 5px; }
+
+/*# sourceMappingURL=OrderCard.css.map */

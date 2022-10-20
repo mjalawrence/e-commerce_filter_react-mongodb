@@ -1,0 +1,50 @@
+.side_bar {
+  display: flex;
+  flex-direction: column;
+  align-content: center; }
+
+.side_bar_text {
+  text-align: left;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  margin: 10px;
+  background-color: black; }
+
+#category,
+#character {
+  border: solid 1px white; }
+
+.title {
+  font-size: 25px;
+  padding: 5px; }
+
+.filter_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+label {
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.character,
+.category {
+  margin-right: 10px;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  background-clip: content-box;
+  padding: 3px; }
+
+.character:checked,
+.category:checked {
+  background-color: white; }
+
+.character:hover,
+.category:hover {
+  background-color: white; }
+
+/*# sourceMappingURL=SideBar.css.map */

@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react"
-import './/ProductPage.scss'
-import ProductCard from '../ProductCard'
+import ".//ProductPage.scss"
+import ProductCard from "./ProductCard"
+import QuantityButtons from "../SideBar/QuantityButtons";
 
-const ProductPage = ({activeCategoryFilter, activeCharacterFilter}) => {
-
-    const [productData, setProductData] = useState([])
+const ProductPage = ({productData, setProductData, orderArray, setOrderArray, activeCategoryFilter, activeCharacterFilter}) => {
 
     useEffect(() => {
 
@@ -44,12 +43,18 @@ const ProductPage = ({activeCategoryFilter, activeCharacterFilter}) => {
 
     let products = productData.map((product, index) => {
         return <ProductCard
-                    key = {index}
-                    title = {product.title}
-                    price = {product.price}
-                    image = {product.image}
+                    key={index}
+                    title={product.title}
+                    price={product.price}
+                    image={product.image}
+                    character={product.character}
+                    category={product.category}
+                    orderArray={orderArray}
+                    setOrderArray={setOrderArray}
                 />
     })
+
+
 
     return (
         <main>
@@ -61,3 +66,18 @@ const ProductPage = ({activeCategoryFilter, activeCharacterFilter}) => {
 }
 
 export default ProductPage
+//
+// let ordersDisplay = orderArray.map(orderItem => {
+//     return (
+//         <div>
+//             <p>{orderItem.character} X {orderItem.category}</p>
+//             <QuantityButtons
+//                 character={orderItem.character}
+//                 category={orderItem.category}
+//                 price={orderItem.price}
+//                 orderArray={orderArray}
+//                 setOrderArray={setOrderArray}
+//             />
+//         </div>
+//     )
+// })

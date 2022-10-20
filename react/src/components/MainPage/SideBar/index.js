@@ -1,15 +1,17 @@
-import Filter from '../Filter'
-import ResetFilterButton from '../ResetFilterButton'
+import Filter from './Filter'
+import ResetFilterButton from './ResetFilterButton'
+import OrderCard from "./OrderCard";
 import {useRef} from "react";
+import './/SideBar.scss'
 
 
-const SideBar = ({setActiveCategoryFilter, activeCategoryFilter, setActiveCharacterFilter, activeCharacterFilter}) => {
+const SideBar = ({ productData, orderArray, setOrderArray, setActiveCategoryFilter, activeCategoryFilter, setActiveCharacterFilter, activeCharacterFilter}) => {
 
     const categoryRefs = useRef([])
     const characterRefs = useRef([])
 
     return (
-        <div>
+        <div className="side_bar">
             <Filter
                 searchType="category"
                 setActiveCategoryFilter={setActiveCategoryFilter}
@@ -28,16 +30,11 @@ const SideBar = ({setActiveCategoryFilter, activeCategoryFilter, setActiveCharac
                 categoryRefs={categoryRefs}
                 characterRefs={characterRefs}
             />
-
-            <h1>Stretch Goals</h1>
-            <ol>
-                <li>be able to search specific item in the search bar</li>
-                <ul>
-                    <li>by id, title, etc</li>
-                </ul>
-                <br></br>
-                <li>style</li>
-            </ol>
+            <OrderCard
+                productData={productData}
+                orderArray={orderArray}
+                setOrderArray={setOrderArray}
+            />
         </div>
     )
 }

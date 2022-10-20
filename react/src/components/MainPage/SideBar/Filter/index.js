@@ -1,7 +1,7 @@
 import {useEffect, useState, useRef} from "react";
 import './Filter.scss'
 
-const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, filterRef, uncheckAll}) => {
+const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, filterRef}) => {
 
     const [filterList, setFilterList] = useState({})
     const [capsFilterTitle, setCapsFilterTitle] = useState('')
@@ -51,7 +51,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
     useEffect(() => {
         if (Object.keys(filterList).length !== 0) {
             let filters = filterList.map((filter_option, index) => {
-                return <div key={index}>
+                return <div class="filter_box" key={index}>
                     <label>
                         <input
                             className={searchType}
@@ -61,7 +61,9 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
                             onChange={filterChange}
                             ref={(element) => {filterRef.current[index] = element}}
                         />
-                        {filter_option}
+                        <div class="filter_name">
+                            {filter_option}
+                        </div>
                     </label>
                 </div>
             })
@@ -70,7 +72,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
     },[capsFilterTitle])
 
     return (
-        <div className="side_bar_text">
+        <div id={searchType} className="side_bar_text" >
             <div className="title">
                 {capsFilterTitle}
             </div>

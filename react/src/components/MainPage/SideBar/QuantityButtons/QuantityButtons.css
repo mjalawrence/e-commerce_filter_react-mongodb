@@ -1,0 +1,24 @@
+.quantity_buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+button {
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  background-clip: content-box;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  border: 2px solid white;
+  padding: 3px; }
+
+button:hover {
+  background-color: white;
+  color: black; }
+
+.qty_digit {
+  padding: 7px; }
+
+/*# sourceMappingURL=QuantityButtons.css.map */
