@@ -42,4 +42,19 @@ img {
   font-size: 25px;
   text-align: left; }
 
+.add_to_cart_button {
+  appearance: none;
+  width: auto;
+  height: auto;
+  background-clip: content-box;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  border: 2px solid white;
+  padding: 3px; }
+
+.add_to_cart_button:hover {
+  background-color: white;
+  color: black; }
+
 /*# sourceMappingURL=ProductCard.css.map */

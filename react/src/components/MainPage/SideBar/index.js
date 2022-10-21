@@ -5,7 +5,7 @@ import {useRef} from "react";
 import './/SideBar.scss'
 
 
-const SideBar = ({ productData, orderArray, setOrderArray, setActiveCategoryFilter, activeCategoryFilter, setActiveCharacterFilter, activeCharacterFilter}) => {
+const SideBar = ({ productData, orderArray, setOrderArray, setActiveCategoryFilter, activeCategoryFilter, setActiveCharacterFilter, activeCharacterFilter, addItem}) => {
 
     const categoryRefs = useRef([])
     const characterRefs = useRef([])
@@ -34,6 +34,7 @@ const SideBar = ({ productData, orderArray, setOrderArray, setActiveCategoryFilt
                 productData={productData}
                 orderArray={orderArray}
                 setOrderArray={setOrderArray}
+                addItem={addItem}
             />
         </div>
     )

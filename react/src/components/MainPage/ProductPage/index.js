@@ -3,7 +3,7 @@ import ".//ProductPage.scss"
 import ProductCard from "./ProductCard"
 import QuantityButtons from "../SideBar/QuantityButtons";
 
-const ProductPage = ({productData, setProductData, orderArray, setOrderArray, activeCategoryFilter, activeCharacterFilter}) => {
+const ProductPage = ({productData, setProductData, orderArray, setOrderArray, activeCategoryFilter, activeCharacterFilter, addItem}) => {
 
     useEffect(() => {
 
@@ -44,6 +44,8 @@ const ProductPage = ({productData, setProductData, orderArray, setOrderArray, ac
     let products = productData.map((product, index) => {
         return <ProductCard
                     key={index}
+                    index={product.id}
+                    id={product._id}
                     title={product.title}
                     price={product.price}
                     image={product.image}
@@ -51,6 +53,7 @@ const ProductPage = ({productData, setProductData, orderArray, setOrderArray, ac
                     category={product.category}
                     orderArray={orderArray}
                     setOrderArray={setOrderArray}
+                    addItem={addItem}
                 />
     })
 

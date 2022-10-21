@@ -9,6 +9,23 @@ function MainPage() {
     const [activeCategoryFilter, setActiveCategoryFilter] = useState([])
     const [activeCharacterFilter, setActiveCharacterFilter] = useState([])
 
+    const addItem = (id, character, category, price) => {
+        let orderArrayClone = [...orderArray]
+        const orderArrayItem = {id, character, category, price, qty: 1}
+        let itemOrdered = false
+        orderArray.forEach((orderItem, key) => {
+            if (orderItem.character === character && orderItem.category === category) {
+                itemOrdered = key
+            }
+        })
+        if (itemOrdered === false) {
+            orderArrayClone.push(orderArrayItem)
+        } else {
+            orderArrayClone[itemOrdered].qty++
+        }
+        setOrderArray(orderArrayClone)
+    }
+
     return (
         <div className="main">
             <SideBar
@@ -19,6 +36,7 @@ function MainPage() {
                 activeCategoryFilter={activeCategoryFilter}
                 setActiveCharacterFilter={setActiveCharacterFilter}
                 activeCharacterFilter={activeCharacterFilter}
+                addItem={addItem}
             />
             <ProductPage
                 productData={productData}
@@ -27,6 +45,7 @@ function MainPage() {
                 setOrderArray={setOrderArray}
                 activeCategoryFilter={activeCategoryFilter}
                 activeCharacterFilter={activeCharacterFilter}
+                addItem={addItem}
             />
         </div>
     );
