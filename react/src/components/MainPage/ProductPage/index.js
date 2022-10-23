@@ -1,10 +1,32 @@
 import {useEffect, useState} from "react"
 import ".//ProductPage.scss"
 import ProductCard from "./ProductCard"
-import QuantityButtons from "../SideBar/QuantityButtons";
+import ProductModal from "./ProductModal";
 
 const ProductPage = ({productData, setProductData, orderArray, setOrderArray, activeCategoryFilter, activeCharacterFilter, addItem}) => {
 
+    const [activeProduct, setActiveProduct] = useState ([])
+
+
+    //gathers product data with which to populate modal
+    let targeted_product
+    for (let i = 0; i < productData.length; i++) {
+        if (Object.values(productData[i]).includes(activeProduct)) {
+        targeted_product = productData[i]
+        break
+        }
+    }
+
+    //if product is in array then: quantity buttons, if not: 'add to cart' button
+    let in_order_array
+    for (let i = 0; i < orderArray.length; i++) {
+        if (Object.values(orderArray[i]).includes(activeProduct)) {
+            in_order_array = true
+            break
+        }
+    }
+
+    //4 fetches for different combinations of filter request
     useEffect(() => {
 
         let character_statement = activeCharacterFilter.join(',')
@@ -54,33 +76,27 @@ const ProductPage = ({productData, setProductData, orderArray, setOrderArray, ac
                     orderArray={orderArray}
                     setOrderArray={setOrderArray}
                     addItem={addItem}
-                />
+                    setActiveProduct={setActiveProduct}
+                    // inOrderArray={in_order_array}
+        />
     })
 
-
-
     return (
-        <main>
+        <div className="product_page">
+            {targeted_product ? <ProductModal
+                orderArray={orderArray}
+                setOrderArray={setOrderArray}
+                addItem={addItem}
+                activeProduct={activeProduct}
+                setActiveProduct={setActiveProduct}
+                targetedProductData={targeted_product}
+                inOrderArray={in_order_array}
+            /> : ""}
             <div className="products__grid">
                 {products}
             </div>
-        </main>
+        </div>
     )
 }
 
 export default ProductPage
-//
-// let ordersDisplay = orderArray.map(orderItem => {
-//     return (
-//         <div>
-//             <p>{orderItem.character} X {orderItem.category}</p>
-//             <QuantityButtons
-//                 character={orderItem.character}
-//                 category={orderItem.category}
-//                 price={orderItem.price}
-//                 orderArray={orderArray}
-//                 setOrderArray={setOrderArray}
-//             />
-//         </div>
-//     )
-// })

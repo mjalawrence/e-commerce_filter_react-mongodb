@@ -1,0 +1,67 @@
+.modal_surrounding {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 100; }
+
+.product_modal {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  z-index: 200;
+  opacity: 1.5;
+  background-color: black;
+  height: auto;
+  width: 50%;
+  top: 20%;
+  left: 37%;
+  border: solid 1px white;
+  padding: 5px 20px 5px 5px; }
+
+.close_modal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px;
+  padding: 0 4px 0 4px;
+  border: 1px solid white; }
+
+.close_modal:hover {
+  border: 1px solid black;
+  cursor: pointer; }
+
+.modal_image {
+  width: 150%;
+  height: auto;
+  margin: 10px 5px 10px 10px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.product_text {
+  margin: 10px 10px 10px 5px; }
+
+.modal_title {
+  font-size: 25px;
+  padding-bottom: 5px; }
+
+.character_category {
+  border-bottom: solid white 1px; }
+
+.modal_description {
+  margin: 10px 0 10px 0;
+  font-size: 20px; }
+
+.modal_price_qty {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-top: solid white 1px;
+  padding-top: 10px; }
+
+.modal_price {
+  font-size: 25px; }
+
+/*# sourceMappingURL=ProductModal.css.map */

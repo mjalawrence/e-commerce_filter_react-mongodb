@@ -45,6 +45,7 @@ label {
 
 .character:hover,
 .category:hover {
-  background-color: white; }
+  background-color: white;
+  cursor: pointer; }
 
 /*# sourceMappingURL=SideBar.css.map */

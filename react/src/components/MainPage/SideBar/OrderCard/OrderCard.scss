@@ -22,6 +22,22 @@ $background_color:black;
   margin: 8px 0 8px 0;
 }
 
+.order {
+  display: flex;
+  flex-direction: row;
+}
+
+.remove_item_all {
+  margin-right: 5px;
+  padding: 0 4px 0 4px;
+  border: 1px solid white;
+}
+
+.remove_item_all:hover {
+  border: 1px solid black;
+  cursor: pointer;
+}
+
 .qty_box {
   display: flex;
   flex-direction: row;

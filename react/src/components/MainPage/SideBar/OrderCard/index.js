@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react"
+// import {useEffect, useState} from "react"
 import QuantityButtons from "../QuantityButtons"
 import "./OrderCard.scss";
 
 const OrderCard = ({ productData, orderArray, setOrderArray, addItem }) => {
 
-    const [subtotal, setSubtotal] = useState(0)
-    const [deliveryFee, setDeliveryFee] = useState(0)
-    const [total, setTotal] = useState(0)
+    // const [subtotal, setSubtotal] = useState(0)
+    // const [deliveryFee, setDeliveryFee] = useState(0)
+    // const [total, setTotal] = useState(0)
 
     function quantityTimesPrice (qty, price) {
         return qty * price
@@ -31,12 +31,30 @@ const OrderCard = ({ productData, orderArray, setOrderArray, addItem }) => {
     //     setSubtotal(itemTotal)
     // }
 
+    const removeItemAll = (id, character, category, price) => {
+        let orderArrayClone = [...orderArray]
+        let itemOrdered = false
+        orderArray.forEach((orderItem, key) => {
+            if (orderItem.character === character && orderItem.category === category) {
+                itemOrdered = key
+            }
+        })
+        if (itemOrdered !== false) {
+            orderArrayClone.splice(itemOrdered, 1)
+            setOrderArray(orderArrayClone)
+        }
+    }
+
     let ordersDisplay = orderArray.map(orderItem => {
         const singular_category = (orderItem.category).slice(0, -1)
         const quantity_x_price = quantityTimesPrice(orderItem.qty, orderItem.price)
         return (
             <div className="order_box">
-                <div className="order">{orderItem.character} {singular_category}</div>
+                <div className="order">
+                    <div className="remove_item_all" onClick={() => {
+                        removeItemAll(orderItem._id, orderItem.character, orderItem.category, orderItem.price)
+                    }}>X</div>
+                    {orderItem.character} {singular_category}</div>
                 <div className="qty_box">
                 <div className="price_box">£{quantity_x_price} :</div>
                     <QuantityButtons
@@ -69,22 +87,4 @@ const OrderCard = ({ productData, orderArray, setOrderArray, addItem }) => {
     )
 }
 
-
 export default OrderCard;
-
-// const myObj = [
-//     {category:"Aprons", character:"Fred", price:"24"},
-//     {category:"Mugs", character:"Dolores", price:"36"},
-//     {category:"Baseball Hats", character:"Rex", price:"15"},
-//     {category:"Aprons", character:"Fred", price:"24"},
-//     {category:"Mugs", character:"Dolores", price:"36"},
-//     {category:"Baseball Hats", character:"Rex", price:"15"}
-// ]
-//
-// let ordersTest = myObj.map(orderItem => {
-//     return (
-//         <div>
-//             <p>{orderItem.character} X {orderItem.category}</p>
-//         </div>
-//     )
-// })

@@ -16,7 +16,8 @@ button {
 
 button:hover {
   background-color: white;
-  color: black; }
+  color: black;
+  cursor: pointer; }
 
 .qty_digit {
   padding: 7px; }
