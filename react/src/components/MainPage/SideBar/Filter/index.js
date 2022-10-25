@@ -51,7 +51,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
     useEffect(() => {
         if (Object.keys(filterList).length !== 0) {
             let filters = filterList.map((filter_option, index) => {
-                return <div class="filter_box" key={index}>
+                return <div className="filter_box" key={index}>
                     <label>
                         <input
                             className={searchType}
@@ -61,7 +61,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
                             onChange={filterChange}
                             ref={(element) => {filterRef.current[index] = element}}
                         />
-                        <div class="filter_name">
+                        <div className="filter_name">
                             {filter_option}
                         </div>
                     </label>

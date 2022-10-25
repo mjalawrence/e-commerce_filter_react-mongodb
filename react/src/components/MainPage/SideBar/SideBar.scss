@@ -17,7 +17,18 @@ $background_color:black;
 
 #category,
 #character {
+  position: fixed;
+  width: 10%;
   border: solid 1px $font_color;
+}
+#category {
+  top: 85px;
+  left: 10px
+}
+
+#character {
+  top: 85px;
+  left: 190px;
 }
 
 .title {

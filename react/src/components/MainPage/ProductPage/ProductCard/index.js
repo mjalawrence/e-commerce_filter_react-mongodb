@@ -2,7 +2,17 @@ import QuantityButtons from "../../SideBar/QuantityButtons";
 import './ProductCard.scss'
 
 
-const ProductCard = ({ index, id, price, image, character, category, orderArray, setOrderArray, addItem, setActiveProduct }) => {
+const ProductCard = ({ index,
+                         id,
+                         price,
+                         image,
+                         character,
+                         category,
+                         orderArray,
+                         setOrderArray,
+                         addItem,
+                         removeItem,
+                         setActiveProduct }) => {
 
     const singular_category = category.slice(0, -1)
 
@@ -47,8 +57,9 @@ const ProductCard = ({ index, id, price, image, character, category, orderArray,
                         orderArray={orderArray}
                         setOrderArray={setOrderArray}
                         addItem={addItem}
+                        removeItem={removeItem}
                     /> : <div className="add_to_cart_button"
-                          onClick={() => {addItem(id, character, category, price)}}
+                          onClick={() => {addItem(id, image, character, category, price)}}
                     > Add to Cart</div>}
                 </div>
             </div>

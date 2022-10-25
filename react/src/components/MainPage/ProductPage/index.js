@@ -3,10 +3,16 @@ import ".//ProductPage.scss"
 import ProductCard from "./ProductCard"
 import ProductModal from "./ProductModal";
 
-const ProductPage = ({productData, setProductData, orderArray, setOrderArray, activeCategoryFilter, activeCharacterFilter, addItem}) => {
+const ProductPage = ({ productData,
+                         setProductData,
+                         orderArray,
+                         setOrderArray,
+                         activeCategoryFilter,
+                         activeCharacterFilter,
+                         addItem,
+                         removeItem }) => {
 
     const [activeProduct, setActiveProduct] = useState ([])
-
 
     //gathers product data with which to populate modal
     let targeted_product
@@ -76,6 +82,7 @@ const ProductPage = ({productData, setProductData, orderArray, setOrderArray, ac
                     orderArray={orderArray}
                     setOrderArray={setOrderArray}
                     addItem={addItem}
+                    removeItem={removeItem}
                     setActiveProduct={setActiveProduct}
                     // inOrderArray={in_order_array}
         />
@@ -87,6 +94,7 @@ const ProductPage = ({productData, setProductData, orderArray, setOrderArray, ac
                 orderArray={orderArray}
                 setOrderArray={setOrderArray}
                 addItem={addItem}
+                removeItem={removeItem}
                 activeProduct={activeProduct}
                 setActiveProduct={setActiveProduct}
                 targetedProductData={targeted_product}

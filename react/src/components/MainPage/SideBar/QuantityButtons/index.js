@@ -1,26 +1,17 @@
 import { useEffect, useState} from "react"
 import "./QuantityButtons.scss"
 
-const QuantityButtons = ({ id, character, category, price, orderArray, setOrderArray, addItem }) => {
+const QuantityButtons = ({ id,
+                             image,
+                             character,
+                             category,
+                             price,
+                             orderArray,
+                             setOrderArray,
+                             addItem,
+                             removeItem }) => {
 
     const [quantity, setQuantity] = useState (0)
-
-    const removeItem = (id, character, category, price) => {
-        let orderArrayClone = [...orderArray]
-        let itemOrdered = false
-        orderArray.forEach((orderItem, key) => {
-            if (orderItem.character === character && orderItem.category === category) {
-                itemOrdered = key
-            }
-        })
-        if (itemOrdered !== false) {
-            orderArrayClone[itemOrdered].qty--
-            if(orderArrayClone[itemOrdered].qty < 1) {
-                orderArrayClone.splice(itemOrdered, 1)
-            }
-            setOrderArray(orderArrayClone)
-        }
-    }
 
     function findQuantity() {
         let itemInOrder = false
@@ -40,7 +31,7 @@ const QuantityButtons = ({ id, character, category, price, orderArray, setOrderA
         <>
             <div className="quantity_buttons">
                 <button onClick={() => {
-                    addItem(id, character, category, price)
+                    addItem(id, image, character, category, price)
                 }}>+</button>
                 <div className="qty_digit">{quantity}</div>
                 <button onClick={() => {

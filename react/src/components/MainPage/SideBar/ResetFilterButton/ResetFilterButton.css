@@ -1,4 +1,7 @@
 .reset_div {
+  position: fixed;
+  top: 295px;
+  width: 25vw;
   text-align: center;
   margin: 10px; }
 
@@ -10,10 +13,8 @@
   font-size: 20px; }
 
 .reset_filters:hover {
-  border: solid 1px black; }
-
-.reset_filters:visited {
-  text-decoration: none;
-  color: white; }
+  color: black;
+  background-color: white;
+  cursor: pointer; }
 
 /*# sourceMappingURL=ResetFilterButton.css.map */

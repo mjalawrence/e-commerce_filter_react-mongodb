@@ -22,7 +22,7 @@ const ResetFilterButton = ({setActiveCategoryFilter, setActiveCharacterFilter, c
     return (
         <div className="reset_div">
             <a
-                href="#"
+                // href="#"
                 className="reset_filters "
                 onClick={resetFilters}
             >

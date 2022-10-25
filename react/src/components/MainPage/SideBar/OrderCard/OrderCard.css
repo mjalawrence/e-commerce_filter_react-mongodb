@@ -1,4 +1,7 @@
 .cart_box {
+  position: fixed;
+  top: 350px;
+  width: 23vw;
   border: solid 1px white;
   text-align: left;
   padding: 10px;
@@ -8,6 +11,10 @@
 .cart_title {
   text-align: center;
   font-size: 25px; }
+
+.orders {
+  height: 20vw;
+  overflow: auto; }
 
 .order_box {
   display: flex;
@@ -37,5 +44,31 @@
 
 .price_box {
   padding: 0 5px 0 5px; }
+
+.subtotal_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 5px;
+  border-top: solid 1px white;
+  font-size: 20px; }
+
+.checkout_button_container {
+  display: flex;
+  justify-content: center; }
+
+.checkout_button {
+  text-align: center;
+  width: 70%;
+  padding: 5px;
+  border: 2px solid white;
+  margin: 10px 5px 5px 5px;
+  font-size: 20px;
+  cursor: pointer; }
+
+.checkout_button:hover {
+  color: black;
+  background-color: white; }
 
 /*# sourceMappingURL=OrderCard.css.map */

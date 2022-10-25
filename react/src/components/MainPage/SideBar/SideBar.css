@@ -12,7 +12,17 @@
 
 #category,
 #character {
+  position: fixed;
+  width: 10%;
   border: solid 1px white; }
+
+#category {
+  top: 85px;
+  left: 10px; }
+
+#character {
+  top: 85px;
+  left: 190px; }
 
 .title {
   font-size: 25px;

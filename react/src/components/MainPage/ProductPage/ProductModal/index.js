@@ -1,7 +1,13 @@
 import "./ProductModal.scss"
 import QuantityButtons from "../../SideBar/QuantityButtons";
 
-const ProductModal = ({ activeProduct, setActiveProduct, targetedProductData, orderArray, setOrderArray, addItem }) => {
+const ProductModal = ({ activeProduct,
+                          setActiveProduct,
+                          targetedProductData,
+                          orderArray,
+                          setOrderArray,
+                          addItem,
+                          removeItem }) => {
 
     const closeModal = (e) => {
         setActiveProduct([])
@@ -9,8 +15,6 @@ const ProductModal = ({ activeProduct, setActiveProduct, targetedProductData, or
 
     const singular_category = targetedProductData.category.slice(0, -1)
     const clean_title = targetedProductData.title.replace(singular_category, "")
-
-    // console.log(targetedProductData.description)
 
     let description_array = targetedProductData.description.split(". ")
     let descriptions = description_array.map(description_item => {
@@ -34,33 +38,34 @@ const ProductModal = ({ activeProduct, setActiveProduct, targetedProductData, or
         <>
             <div className="modal_surrounding" onClick={closeModal}>
             </div>
-
             <div className="product_modal">
-                    <div className="close_modal" onClick={closeModal}>X</div>
-                    <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image}")`}}> </div>
-                    <div className="product_text">
-                        <div className="modal_title">{clean_title}</div>
-                        <div className="character_category">
-                            <div className="modal_character">{targetedProductData.character}</div>
-                            <div className="modal_category">{singular_category}</div>
-                        </div>
-                        {descriptions}
-                        <div className="modal_price_qty">
-                            <div className="modal_price">£{targetedProductData.price} </div>
-                            {in_order_array ? <QuantityButtons
-                                id={targetedProductData._id}
-                                character={targetedProductData.character}
-                                category={targetedProductData.category}
-                                price={targetedProductData.price}
-                                orderArray={orderArray}
-                                setOrderArray={setOrderArray}
-                                addItem={addItem}
-                            /> : <div className="add_to_cart_button"
-                                      onClick={() => {addItem(targetedProductData._id, targetedProductData.character, targetedProductData.category, targetedProductData.price)}}
-                            > Add to Cart</div>}
-                        </div>
+                <div className="close_modal" onClick={closeModal}>X</div>
+                <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image}")`}}> </div>
+                <div className="product_text">
+                    <div className="modal_title">{clean_title}</div>
+                    <div className="character_category">
+                        <div className="modal_character">{targetedProductData.character}</div>
+                        <div className="modal_category">{singular_category}</div>
+                    </div>
+                    {descriptions}
+                    <div className="modal_price_qty">
+                        <div className="modal_price">£{targetedProductData.price} </div>
+                        {in_order_array ? <QuantityButtons
+                            id={targetedProductData._id}
+                            image={targetedProductData.image}
+                            character={targetedProductData.character}
+                            category={targetedProductData.category}
+                            price={targetedProductData.price}
+                            orderArray={orderArray}
+                            setOrderArray={setOrderArray}
+                            addItem={addItem}
+                            removeItem={removeItem}
+                        /> : <div className="add_to_cart_button"
+                                  onClick={() => {addItem(targetedProductData._id, targetedProductData.image, targetedProductData.character, targetedProductData.category, targetedProductData.price)}}
+                        > Add to Cart</div>}
                     </div>
                 </div>
+            </div>
         </>
     )
 }

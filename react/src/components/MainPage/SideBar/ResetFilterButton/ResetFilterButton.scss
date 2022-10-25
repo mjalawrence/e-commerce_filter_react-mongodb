@@ -1,10 +1,11 @@
 $font_color: white;
 
 .reset_div {
+  position: fixed;
+  top: 295px;
+  width: 25vw;
   text-align: center;
   margin: 10px
-
-
 }
 .reset_filters {
   background-color: black;
@@ -14,15 +15,8 @@ $font_color: white;
   font-size: 20px;
 }
 
-
 .reset_filters:hover {
-  border: solid 1px black;
-}
-
-.reset_div {
-
-}
-.reset_filters:visited {
-  text-decoration: none;
-  color: $font_color;
+  color: black;
+  background-color: white;
+  cursor: pointer;
 }
