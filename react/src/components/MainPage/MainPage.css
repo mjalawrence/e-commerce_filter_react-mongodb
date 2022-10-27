@@ -1,0 +1,12 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: black;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: solid 1px white; }
+
+/*# sourceMappingURL=MainPage.css.map */

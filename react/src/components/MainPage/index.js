@@ -1,15 +1,20 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
+import ".//MainPage.scss"
 import CheckoutPage from "./CheckoutPage";
 import ProductPage from "./ProductPage";
 import SideBar from "./SideBar";
 
 const MainPage = () => {
 
+    const [activeProduct, setActiveProduct] = useState ([])
     const [productData, setProductData] = useState([])
     const [orderArray, setOrderArray] = useState([]);
     const [activeCategoryFilter, setActiveCategoryFilter] = useState([])
     const [activeCharacterFilter, setActiveCharacterFilter] = useState([])
     const [activeCheckout, setActiveCheckout] = useState(false)
+
+
+    console.log(orderArray)
 
     const addItem = (id, image, character, category, price) => {
         let orderArrayClone = [...orderArray]
@@ -59,22 +64,29 @@ const MainPage = () => {
         }
     }
 
+    const closeModal = () => {
+        setActiveProduct([])
+    }
+
     return (
         <>
+            <div className="header" onClick={closeModal}>
+                Robo-Merch
+            </div>
             {activeCheckout ? <div className="checkout_main">
                     <CheckoutPage
-                                    orderArray={orderArray}
-                                    setOrderArray={setOrderArray}
-                                    addItem={addItem}
-                                    removeItem={removeItem}
-                                    removeItemAll={removeItemAll}
-                                    setActiveCheckout={setActiveCheckout}
-
+                        orderArray={orderArray}
+                        setOrderArray={setOrderArray}
+                        addItem={addItem}
+                        removeItem={removeItem}
+                        removeItemAll={removeItemAll}
+                        setActiveCheckout={setActiveCheckout}
                     />
                     </div> :
                 <div className="main">
                     <SideBar
                         productData={productData}
+                        setProductData={setProductData}
                         orderArray={orderArray}
                         setOrderArray={setOrderArray}
                         setActiveCategoryFilter={setActiveCategoryFilter}
@@ -85,6 +97,8 @@ const MainPage = () => {
                         removeItem={removeItem}
                         removeItemAll={removeItemAll}
                         setActiveCheckout={setActiveCheckout}
+                        setActiveProduct={setActiveProduct}
+                        activeProduct={activeProduct}
                     />
                     <ProductPage
                         productData={productData}
@@ -95,6 +109,8 @@ const MainPage = () => {
                         activeCharacterFilter={activeCharacterFilter}
                         addItem={addItem}
                         removeItem={removeItem}
+                        setActiveProduct={setActiveProduct}
+                        activeProduct={activeProduct}
                     />
                 </div>
             }

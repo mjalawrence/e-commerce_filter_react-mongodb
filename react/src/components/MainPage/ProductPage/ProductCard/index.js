@@ -35,7 +35,7 @@ const ProductCard = ({ index,
             <div className="product_card">
                 <div className="product_details">
                 <div className="image_container">
-                    <div className="product_image" style={{backgroundImage: `url("${image}")`}}></div>
+                    <div className="product_image" style={{backgroundImage: `url("${image}")`}}> </div>
                     <a
                         className="see_more_button"
                         name={id}

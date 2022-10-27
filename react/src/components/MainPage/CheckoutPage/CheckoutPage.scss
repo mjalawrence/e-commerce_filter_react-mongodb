@@ -23,6 +23,11 @@ table {
 }
 
 th {
+  padding-bottom: 10px;
+
+}
+
+th {
   text-align: left;
   font-size: 25px;
 }
@@ -88,15 +93,27 @@ td {
 }
 
 .checkout_footer {
- text-align: right;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  align-items: flex-end;
 }
 
 .checkout_total_details {
+  width: 25%;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.label_mini_container {
+  text-align: left;
 }
 
 .checkout_delivery {
   font-size: 25px;
+  padding-bottom: 5px;
 }
 
 .checkout_total {
@@ -104,7 +121,7 @@ td {
 }
 
 .checkout_buttons_container {
-  padding: 10px;
+  padding: 10px 0 10px 10px;
 }
 
 .keep_shopping_button, .pay_now_button {

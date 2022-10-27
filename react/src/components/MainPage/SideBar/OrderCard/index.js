@@ -34,7 +34,6 @@ const OrderCard = ({ orderArray,
     }
 
     let ordersDisplay = orderArray.map((orderItem, key) => {
-        console.log(orderItem)
         const singular_category = (orderItem.category).slice(0, -1)
         const quantity_x_price = quantityTimesPrice(orderItem.qty, orderItem.price)
         return (

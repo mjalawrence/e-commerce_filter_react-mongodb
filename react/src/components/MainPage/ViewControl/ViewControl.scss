@@ -1,0 +1,34 @@
+.sort_box {
+  position: fixed;
+  top: 85px;
+  width: 23vw;
+  border: solid 1px white;
+  padding: 10px;
+  margin: 10px;
+  background-color: black;
+}
+
+.sort_title {
+  font-size: 20px;
+}
+
+.sort_by_price, .sort_by_character, .sort_by_category {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sort_checkbox {
+  margin-right: 10px;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50px;
+  background-clip: content-box;
+  padding: 3px;
+}
+
+.sort_checkbox:checked {
+  background-color: white;
+}

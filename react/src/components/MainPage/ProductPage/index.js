@@ -10,9 +10,9 @@ const ProductPage = ({ productData,
                          activeCategoryFilter,
                          activeCharacterFilter,
                          addItem,
-                         removeItem }) => {
-
-    const [activeProduct, setActiveProduct] = useState ([])
+                         removeItem,
+                         setActiveProduct,
+                         activeProduct }) => {
 
     //gathers product data with which to populate modal
     let targeted_product
@@ -69,24 +69,23 @@ const ProductPage = ({ productData,
         }
     }, [activeCategoryFilter, activeCharacterFilter])
 
-    let products = productData.map((product, index) => {
-        return <ProductCard
-                    key={index}
-                    index={product.id}
-                    id={product._id}
-                    title={product.title}
-                    price={product.price}
-                    image={product.image}
-                    character={product.character}
-                    category={product.category}
-                    orderArray={orderArray}
-                    setOrderArray={setOrderArray}
-                    addItem={addItem}
-                    removeItem={removeItem}
-                    setActiveProduct={setActiveProduct}
-                    // inOrderArray={in_order_array}
-        />
-    })
+        let products = productData.map((product, index) => {
+            return <ProductCard
+                        key={index}
+                        index={product.id}
+                        id={product._id}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        character={product.character}
+                        category={product.category}
+                        orderArray={orderArray}
+                        setOrderArray={setOrderArray}
+                        addItem={addItem}
+                        removeItem={removeItem}
+                        setActiveProduct={setActiveProduct}
+            />
+        })
 
     return (
         <div className="product_page">

@@ -1,10 +1,15 @@
 import ".//ResetFilterButton.scss"
 
-const ResetFilterButton = ({setActiveCategoryFilter, setActiveCharacterFilter, categoryRefs, characterRefs}) => {
+const ResetFilterButton = ({ setActiveCategoryFilter,
+                               setActiveCharacterFilter,
+                               categoryRefs,
+                               characterRefs,
+                               setSortBy }) => {
 
     const setActiveFilters = () => {
         setActiveCategoryFilter([])
         setActiveCharacterFilter([])
+        setSortBy("category")
     }
 
     const resetFilters = () => {
@@ -22,7 +27,6 @@ const ResetFilterButton = ({setActiveCategoryFilter, setActiveCharacterFilter, c
     return (
         <div className="reset_div">
             <a
-                // href="#"
                 className="reset_filters "
                 onClick={resetFilters}
             >

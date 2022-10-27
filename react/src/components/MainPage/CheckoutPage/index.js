@@ -86,8 +86,14 @@ const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, r
                 </table>
                 <div className="checkout_footer">
                     <div className="checkout_total_details">
-                        <div className="checkout_delivery"> Delivery: £{deliveryFee}</div>
-                        <div className="checkout_total">Total: £{total}</div>
+                        <div className="label_mini_container">
+                            <div className="checkout_delivery"> Delivery</div>
+                            <div className="checkout_total">Total</div>
+                        </div>
+                        <div className="totals_mini_container">
+                            <div className="checkout_delivery">£{deliveryFee}</div>
+                            <div className="checkout_total">£{total}</div>
+                        </div>
                     </div>
                     <div className="checkout_buttons_container">
                         <a className="keep_shopping_button" onClick={() => {setActiveCheckout(false)}}>
