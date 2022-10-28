@@ -82,9 +82,9 @@ const OrderCard = ({ orderArray,
                     </div>
                 </div>
                 <div className="checkout_button_container">
-                    <a className="checkout_button" onClick={() => {setActiveCheckout(true)}}>
+                    {orderArray.length ? <a className="checkout_button" onClick={() => {setActiveCheckout(true)}}>
                         Proceed to Checkout
-                    </a>
+                    </a> : ""}
                 </div>
             </div>
         </>

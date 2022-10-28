@@ -100,5 +100,73 @@
   cursor: pointer;
 }
 
+.product_row {
+  background-color: black;
+  padding: 10px;
+  margin: 20px 20px 0 10px;
+  //text-align: left;
+  border: solid 1px white;
+  display: flex;
+  flex-direction: row;
+  //justify-content: space-between;
+}
+
+.row_image_container {
+  width: 20%;
+}
+
+.row_product_image {
+  height: 15vw;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.row_product_info_container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.row_name_title_price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row_name_title {
+  display: flex;
+  flex-direction: column;
+}
+
+.character_category_row {
+  font-size: 25px;
+}
+
+.row_title {
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+.row_price_quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 50px;
+}
+
+.row_price {
+  font-size: 25px;
+  padding: 0 10px 0 10px;
+}
+
+.row_descriptions {
+  border-top: solid white 1px;
+}
+
+.row_description {
+  padding: 5px 0 5px 0;
+}
+
 
 

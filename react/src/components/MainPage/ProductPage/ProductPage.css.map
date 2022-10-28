@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,aAAc;EACZ,MAAM,EAAE,IAAI;;AAGd,eAAgB;EACd,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,eAAe",
+"mappings": "AAAA,aAAc;EACZ,MAAM,EAAE,IAAI;;AAGd,cAAe;EACb,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,eAAe;;AAGxC,cAAe;EACb,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM",
 "sources": ["ProductPage.scss"],
 "names": [],
 "file": "ProductPage.css"

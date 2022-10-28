@@ -1,9 +1,11 @@
-import ".//ViewControl.scss"
+import ".//Sorter.scss"
+import {useEffect} from "react";
 
-const ViewControl = ({ productData,
-                         setProductData,
-                         sortBy,
-                         setSortBy }) => {
+const Sorter = ({ productData,
+                    setProductData,
+                    sortBy,
+                    setSortBy,
+                    resort }) => {
 
     function sortByProperty(array, propertyName) {
         let arrayClone = [...array]
@@ -32,13 +34,18 @@ const ViewControl = ({ productData,
         setSortBy(e.target.value)
     }
 
+    useEffect(() => {
+        setProductData(sortByProperty(productData, sortBy))
+        console.log('changed')
+    }, [resort])
+
     return (
         <>
             <div className="sort_box">
                 <div className="sort_title">
                     Sort By
                 </div>
-                <div className="sort_by_category">
+                <label className="sort_by_category">
                     <input
                         className="sort_checkbox"
                         type="radio"
@@ -47,9 +54,9 @@ const ViewControl = ({ productData,
                         checked={sortBy === "category"}
                         onChange={categorySorter}
                     />
-                    category
-                </div>
-                <div className="sort_by_character" >
+                    Category
+                </label>
+                <label className="sort_by_character" >
                     <input
                         className="sort_checkbox"
                         type="radio"
@@ -58,25 +65,22 @@ const ViewControl = ({ productData,
                         checked={sortBy === "character"}
                         onChange={characterSorter}
                     />
-                    character
-                </div>
-                <div>
-                    <div className="sort_by_price" >
-                        <input
-                            className="sort_checkbox"
-                            type="radio"
-                            name="sort_by"
-                            value="price"
-                            checked={sortBy === "price"}
-                            onChange={priceSorter}
-                        />
-                        price
-                    </div>
-
-                </div>
+                    Character
+                </label>
+                <label className="sort_by_price" >
+                    <input
+                        className="sort_checkbox"
+                        type="radio"
+                        name="sort_by"
+                        value="price"
+                        checked={sortBy === "price"}
+                        onChange={priceSorter}
+                    />
+                    Price
+                </label>
             </div>
         </>
     )
 }
 
-export default ViewControl
+export default Sorter

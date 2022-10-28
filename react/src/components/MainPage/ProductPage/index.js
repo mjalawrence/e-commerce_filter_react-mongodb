@@ -12,7 +12,10 @@ const ProductPage = ({ productData,
                          addItem,
                          removeItem,
                          setActiveProduct,
-                         activeProduct }) => {
+                         activeProduct,
+                         setResort,
+                         view }) => {
+
 
     //gathers product data with which to populate modal
     let targeted_product
@@ -43,6 +46,8 @@ const ProductPage = ({ productData,
                 .then(response => response.json())
                 .then(data => {
                     setProductData(data)
+                    setResort(data)
+
                 })
 
         } else if (Object.keys(activeCategoryFilter).length === 0 && Object.keys(activeCharacterFilter).length !== 0) {
@@ -50,6 +55,7 @@ const ProductPage = ({ productData,
                 .then(response => response.json())
                 .then(data => {
                     setProductData(data)
+                    setResort(data)
                 })
 
         } else if (Object.keys(activeCategoryFilter).length !== 0 && Object.keys(activeCharacterFilter).length === 0) {
@@ -57,6 +63,7 @@ const ProductPage = ({ productData,
                 .then(response => response.json())
                 .then(data => {
                     setProductData(data)
+                    setResort(data)
                 })
 
         } else {
@@ -65,6 +72,7 @@ const ProductPage = ({ productData,
                 .then(response => response.json())
                 .then(data => {
                     setProductData(data)
+                    setResort(data)
                 })
         }
     }, [activeCategoryFilter, activeCharacterFilter])
@@ -72,18 +80,19 @@ const ProductPage = ({ productData,
         let products = productData.map((product, index) => {
             return <ProductCard
                         key={index}
-                        index={product.id}
                         id={product._id}
                         title={product.title}
                         price={product.price}
                         image={product.image}
                         character={product.character}
                         category={product.category}
+                        description={product.description}
                         orderArray={orderArray}
                         setOrderArray={setOrderArray}
                         addItem={addItem}
                         removeItem={removeItem}
                         setActiveProduct={setActiveProduct}
+                        view={view}
             />
         })
 
@@ -99,9 +108,7 @@ const ProductPage = ({ productData,
                 targetedProductData={targeted_product}
                 inOrderArray={in_order_array}
             /> : ""}
-            <div className="products__grid">
-                {products}
-            </div>
+            {view === "rows" ? <div className="products_rows">{products}</div> : <div className="products_grid"> {products}</div> }
         </div>
     )
 }

@@ -1,8 +1,12 @@
 .product_page {
   height: 100%; }
 
-.products__grid {
+.products_grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+.products_rows {
+  display: flex;
+  flex-direction: column; }
 
 /*# sourceMappingURL=ProductPage.css.map */

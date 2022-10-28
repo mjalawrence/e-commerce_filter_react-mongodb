@@ -12,9 +12,8 @@ const MainPage = () => {
     const [activeCategoryFilter, setActiveCategoryFilter] = useState([])
     const [activeCharacterFilter, setActiveCharacterFilter] = useState([])
     const [activeCheckout, setActiveCheckout] = useState(false)
-
-
-    console.log(orderArray)
+    const [resort, setResort] = useState([])
+    const [view, setView] = useState("grid")
 
     const addItem = (id, image, character, category, price) => {
         let orderArrayClone = [...orderArray]
@@ -99,6 +98,9 @@ const MainPage = () => {
                         setActiveCheckout={setActiveCheckout}
                         setActiveProduct={setActiveProduct}
                         activeProduct={activeProduct}
+                        resort={resort}
+                        view={view}
+                        setView={setView}
                     />
                     <ProductPage
                         productData={productData}
@@ -111,6 +113,8 @@ const MainPage = () => {
                         removeItem={removeItem}
                         setActiveProduct={setActiveProduct}
                         activeProduct={activeProduct}
+                        setResort={setResort}
+                        view={view}
                     />
                 </div>
             }

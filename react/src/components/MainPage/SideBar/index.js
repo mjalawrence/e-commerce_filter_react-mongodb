@@ -3,7 +3,8 @@ import ResetFilterButton from './ResetFilterButton'
 import OrderCard from "./OrderCard";
 import {useRef, useState} from "react";
 import './/SideBar.scss'
-import ViewControl from "../ViewControl";
+import Sorter from "./Sorter";
+import ViewControl from "./ViewControl";
 
 
 const SideBar = ({ productData,
@@ -18,8 +19,10 @@ const SideBar = ({ productData,
                      removeItem,
                      removeItemAll,
                      setActiveCheckout,
-                     setActiveProduct
-                     }) => {
+                     setActiveProduct,
+                     resort,
+                     view,
+                     setView }) => {
 
     const categoryRefs = useRef([])
     const characterRefs = useRef([])
@@ -34,11 +37,16 @@ const SideBar = ({ productData,
         <>
 
             <div className="side_bar" onClick={closeModal}>
-                <ViewControl
+                <Sorter
                     productData={productData}
                     setProductData={setProductData}
                     sortBy={sortBy}
                     setSortBy={setSortBy}
+                    resort={resort}
+                />
+                <ViewControl
+                    view={view}
+                    setView={setView}
                 />
                 <Filter
                     searchType="category"

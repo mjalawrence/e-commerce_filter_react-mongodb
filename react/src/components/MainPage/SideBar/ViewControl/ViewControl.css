@@ -1,21 +1,19 @@
-.sort_box {
+.view_box {
   position: fixed;
   top: 85px;
-  width: 23vw;
+  left: 190px;
+  width: 9.5%;
   border: solid 1px white;
   padding: 10px;
   margin: 10px;
   background-color: black; }
 
-.sort_title {
-  font-size: 20px; }
+.view_title {
+  font-size: 20px;
+  padding: 3px; }
 
-.sort_by_price, .sort_by_character, .sort_by_category {
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-
-.sort_checkbox {
+.view_as_button {
+  cursor: pointer;
   margin-right: 10px;
   appearance: none;
   width: 20px;
@@ -25,7 +23,7 @@
   background-clip: content-box;
   padding: 3px; }
 
-.sort_checkbox:checked {
+.view_as_button:checked {
   background-color: white; }
 
 /*# sourceMappingURL=ViewControl.css.map */
