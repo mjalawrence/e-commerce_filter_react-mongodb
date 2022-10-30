@@ -1,11 +1,10 @@
-import Filter from './Filter'
-import ResetFilterButton from './ResetFilterButton'
-import OrderCard from "./OrderCard";
 import {useRef, useState} from "react";
-import './/SideBar.scss'
+import Filter from './Filter'
+import OrderCard from "./OrderCard";
+import ResetFilterButton from './ResetFilterButton'
 import Sorter from "./Sorter";
 import ViewControl from "./ViewControl";
-
+import './/SideBar.scss'
 
 const SideBar = ({ productData,
                      setProductData,
@@ -29,13 +28,14 @@ const SideBar = ({ productData,
     const [sortBy, setSortBy] = useState("category")
 
 
+    //Closes modal by clicking on SideBar
     const closeModal = (e) => {
         setActiveProduct([])
     }
 
+    //Renders Sort-by, View-as, Filters, Reset Filters Button, and Mini Cart
     return (
         <>
-
             <div className="side_bar" onClick={closeModal}>
                 <Sorter
                     productData={productData}

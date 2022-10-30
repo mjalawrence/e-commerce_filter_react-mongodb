@@ -7,6 +7,7 @@ const Sorter = ({ productData,
                     setSortBy,
                     resort }) => {
 
+    //Sorts products by specified property
     function sortByProperty(array, propertyName) {
         let arrayClone = [...array]
         return arrayClone.sort(function (a, b) {
@@ -19,6 +20,8 @@ const Sorter = ({ productData,
         });
     }
 
+    //Uses above function to sort depending on category, character, or price
+        //Updates productData to be rendered on ProductPage
     const categorySorter = (e) => {
         setProductData(sortByProperty(productData, "category"))
         setSortBy(e.target.value)
@@ -34,11 +37,13 @@ const Sorter = ({ productData,
         setSortBy(e.target.value)
     }
 
-    //makes sure filters don't ignore sorter
+    //Makes sortBy isn't ignored when filter checkboxes are changed
     useEffect(() => {
         setProductData(sortByProperty(productData, sortBy))
     }, [resort])
 
+    //Renders sortBy selectors: category, character, price
+        //(I plan to include ascending and descending option)
     return (
         <>
             <div className="sort_box">

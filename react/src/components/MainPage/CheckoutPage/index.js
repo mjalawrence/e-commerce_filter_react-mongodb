@@ -13,6 +13,7 @@ const CheckoutPage = ({ orderArray,
     const [deliveryFee, setDeliveryFee] = useState(0)
     const [total, setTotal] = useState(0)
 
+    //Iterates through orderArray, create subtotal of quantity * price, add delivery cost
     const addTotals = () => {
         let itemTotal = 0
         orderArray.forEach(orderItem => {
@@ -27,14 +28,17 @@ const CheckoutPage = ({ orderArray,
         }
     }
 
+    //Calculates item total based on quantity, probably redundant
     const quantityTimesPrice = (qty, price) => {
         return qty * price
     }
 
+    //Capitalises first letter of a word for final render
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    //Iterates through orderArray to render individual orders with corresponding QuantityButtons
     let ordersDisplay = orderArray.map(orderItem => {
         const singular_category = (orderItem.category).slice(0, -1)
         const quantity_x_price = quantityTimesPrice(orderItem.qty, orderItem.price)
@@ -46,7 +50,7 @@ const CheckoutPage = ({ orderArray,
                     <div className="checkout_title_container">
                         <p className="checkout_product_name">{orderItem.character} : {singular_category} : {capitalizeFirstLetter(orderItem.colour)}</p>
                         <div className="checkout_remove_button" onClick={() => {
-                            removeItemAll(orderItem.id, orderItem.character, orderItem.category)
+                            removeItemAll(orderItem.id, orderItem.image)
                         }}>Remove</div>
                     </div>
                 </td>
@@ -73,11 +77,15 @@ const CheckoutPage = ({ orderArray,
         )
     })
 
+    //Triggers final total calculation after orderArray is finalised and sets total state
     useEffect(addTotals, [orderArray])
     useEffect(() => {
         setTotal(subtotal + deliveryFee)
     }, [subtotal])
 
+    //If no orders, renders a return to shop button
+    //If orders, renders a table to display order details in relevant columns with calculated totals underneath
+        //Also renders a keep shopping and pay now button
     return (
         <>
             {!orderArray.length ?

@@ -23,11 +23,11 @@ const ProductCard = ({ id,
 
     const [colour, setColour] = useState("black")
 
-    //makes category and title presentable
+    //Makes category and title presentable
     const singular_category = category.slice(0, -1)
     const clean_title = title.replace(singular_category, "")
 
-    //separates description paragraph into individual sentences
+    //Separates description paragraph into individual sentences
     let description_array = description.split(". ")
     let descriptions = description_array.map(description_item => {
         let no_code = description_item.replace(/â€+/g, "'")
@@ -37,17 +37,22 @@ const ProductCard = ({ id,
         }
     })
 
+    //Capitalise first letter of word for final render
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    //setActiveProduct
+    //Functionality of "see more" button
+        //also necessary set states for coordinating colours of productModal and productCard
     const seeMoreInfo = (e) => {
         setActiveProduct(e.currentTarget.name)
         setLastTargetedItem(id)
         setColourCoordinator(colour)
     }
 
+//Changes colour of item
+    // also required set states for coordinating colours of productModal and productCard
+//(I plan to dry this up a bit to accommodate possibility of other colours, MVP at the mo)
     const selectBlackItem = (e) => {
         setColour("black")
         setColourCoordinator("black")
@@ -66,6 +71,7 @@ const ProductCard = ({ id,
         setLastTargetedItem(id)
     }
 
+    //Makes sure item colour of selected product changes and does not apply to all products
     function coordinateModalAndCardColours() {
         if (lastTargetedItem === id) {
             setColour(colourCoordinator)
@@ -74,7 +80,8 @@ const ProductCard = ({ id,
 
     useEffect(coordinateModalAndCardColours, [lastTargetedItem, colourCoordinator])
 
-    //if product is in array then: quantity buttons, if not: 'add to cart' button
+    //Iterates through orderArray looking for selected product
+        //If product is in array then: quantity buttons, if not: 'add to cart' button
     let in_order_array
     for (let i = 0; i < orderArray.length; i++) {
         if (Object.values(orderArray[i]).includes(id) && Object.values(orderArray[i]).includes(colour)) {
@@ -83,6 +90,8 @@ const ProductCard = ({ id,
         }
     }
 
+    //Renders Quantity Buttons that relate to specific item colours
+        //(currently assumes all products are at least black, thus needs to be generalised and dried up)
     function colourSpecificQuantityButtons() {
         if (colour === "black") {
             if (in_order_array) {
@@ -127,6 +136,9 @@ const ProductCard = ({ id,
 
     let colour_specific_buttons = colourSpecificQuantityButtons()
 
+
+    //Decides the product image based on the colour useState
+        //(Again assumes all products at least black: needs generalising and drying up)
     function imageSelector(class_variable) {
         if (colour === "black" || image_two === 'NULL') {
             return <div className={class_variable} style={{backgroundImage: `url("${image}")`}} />
@@ -138,6 +150,9 @@ const ProductCard = ({ id,
     let product_image_selector = imageSelector("product_image")
     let row_product_image_selector = imageSelector("row_product_image")
 
+
+    //Renders card depending on selected view (grid or rows)
+        //Grid displays less information but has the option to option modal
     return (
         <>
             {view !== "rows" ?

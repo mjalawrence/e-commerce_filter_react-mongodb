@@ -12,11 +12,8 @@ const OrderCard = ({ orderArray,
     const [itemsInTotal, setItemsInTotal] = useState(0)
     const [subtotal, setSubtotal] = useState(0)
 
-    const quantityTimesPrice = (qty, price) => {
-        return qty * price
-    }
-
-    const calculateQuantity = () => {
+    //Iterates through orderArray to calculate number of items in total
+    const calculateItemQuantity = () => {
         let itemTotal = 0
             orderArray.forEach((orderItem, key) => {
                 itemTotal += orderItem.qty
@@ -24,6 +21,7 @@ const OrderCard = ({ orderArray,
             })
     }
 
+    //Iterates through orderArray, create subtotal of item quantity * price
     const addTotals = () => {
         let itemTotal = 0
         orderArray.forEach((orderItem, key) => {
@@ -33,6 +31,13 @@ const OrderCard = ({ orderArray,
         setSubtotal(itemTotal)
     }
 
+    //Calculates total of individual item based on quantity and price, probably redundant
+    const quantityTimesPrice = (qty, price) => {
+        return qty * price
+    }
+
+    //Decides which colour box to render depending on the colour of orderItem
+        //(Assumes only 3 colours: needs to be generalised and dried up)
     function colourBoxDecider(item) {
         if (item.endsWith("black.jpg")) {
             return <div className="order_colour_box_black" />
@@ -43,6 +48,7 @@ const OrderCard = ({ orderArray,
         }
     }
 
+    //Iterates through orderArray and renders individual orders with name, category, colour, price, and quantity buttons
     let ordersDisplay = orderArray.map((orderItem, key) => {
         const singular_category = (orderItem.category).slice(0, -1)
         const quantity_x_price = quantityTimesPrice(orderItem.qty, orderItem.price)
@@ -50,7 +56,7 @@ const OrderCard = ({ orderArray,
             <div className="order_box">
                 <div className="order">
                     <div className="remove_item_all" onClick={() => {
-                        removeItemAll(orderItem._id, orderItem.character, orderItem.category)
+                        removeItemAll(orderItem.id, orderItem.image)
                     }}>X</div>
                     {orderItem.character} {singular_category}
                 {colourBoxDecider(orderItem.image)}
@@ -75,9 +81,10 @@ const OrderCard = ({ orderArray,
         )
     })
 
-    useEffect(calculateQuantity, [orderArray])
+    useEffect(calculateItemQuantity, [orderArray])
     useEffect(addTotals, [orderArray])
 
+    //renders mini-cart with subtotal and "proceed to checkout" button
     return (
         <>
             <div className="cart_box">

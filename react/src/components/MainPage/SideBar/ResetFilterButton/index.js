@@ -6,12 +6,15 @@ const ResetFilterButton = ({ setActiveCategoryFilter,
                                characterRefs,
                                setSortBy }) => {
 
+    //Clears filters and returns sortBy to "category"
     const setActiveFilters = () => {
         setActiveCategoryFilter([])
         setActiveCharacterFilter([])
         setSortBy("category")
     }
 
+
+    //Unchecks filter check boxes and triggers clear filter function
     const resetFilters = () => {
         categoryRefs.current.map((filter_div) =>
         {
@@ -24,6 +27,7 @@ const ResetFilterButton = ({ setActiveCategoryFilter,
         setActiveFilters()
     }
 
+    //Renders reset filter button
     return (
         <div className="reset_div">
             <a

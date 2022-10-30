@@ -15,6 +15,8 @@ const MainPage = () => {
     const [resort, setResort] = useState([])
     const [view, setView] = useState("grid")
 
+    //Looks in orderArray, if item is present ("image" specifies colour of item), increase quantity,
+        // if not, add to order array clone then update orderArray state
     const addItem = (id, image, character, category, price, colour) => {
         let orderArrayClone = [...orderArray]
         const orderArrayItem = {id, image, character, category, price, colour, qty: 1}
@@ -32,6 +34,8 @@ const MainPage = () => {
         setOrderArray(orderArrayClone)
     }
 
+    //Looks in orderArray, if item (and specific colour) is more than 1, reduce quantity,
+        //if only 1, remove from array clone: update orderArray state
     const removeItem = (id, image) => {
         let orderArrayClone = [...orderArray]
         let itemOrdered = false
@@ -49,11 +53,12 @@ const MainPage = () => {
         }
     }
 
-    const removeItemAll = (id, character, category) => {
+    //Looks in orderArray, if present then remove entirely: update orderArray
+    const removeItemAll = (id, image) => {
         let orderArrayClone = [...orderArray]
         let itemOrdered = false
         orderArray.forEach((orderItem, key) => {
-            if (orderItem.character === character && orderItem.category === category) {
+            if (orderItem.image === image && orderItem.id === id) {
                 itemOrdered = key
             }
         })
@@ -63,10 +68,13 @@ const MainPage = () => {
         }
     }
 
+    //Function to be able to close modal by clicking on header
     const closeModal = () => {
         setActiveProduct([])
     }
 
+
+    //render Sidebar, ProductPage, and CheckoutPage when activated
     return (
         <>
             <div className="header" onClick={closeModal}>

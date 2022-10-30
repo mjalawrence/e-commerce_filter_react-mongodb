@@ -16,10 +16,12 @@ const ProductPage = ({ productData,
                          setResort,
                          view }) => {
 
+    //Both useStates required for coordinating item colour of productCard and productModal
     const [colourCoordinator, setColourCoordinator] = useState("black")
     const [lastTargetedItem, setLastTargetedItem] = useState('')
 
-    //gathers product data with which to populate modal
+    //Iterates through productData array looking for selected product
+        //Fills targeted_product with product data to populate modal
     let targeted_product
     for (let i = 0; i < productData.length; i++) {
         if (Object.values(productData[i]).includes(activeProduct)) {
@@ -28,7 +30,8 @@ const ProductPage = ({ productData,
         }
     }
 
-    //if product is in array then: quantity buttons, if not: 'add to cart' button
+    //Iterates through orderArray looking for selected product
+        //If product is in array then: quantity buttons, if not: 'add to cart' button
     let in_order_array
     for (let i = 0; i < orderArray.length; i++) {
         if (Object.values(orderArray[i]).includes(activeProduct)) {
@@ -37,7 +40,8 @@ const ProductPage = ({ productData,
         }
     }
 
-    //4 fetches for different combinations of filter request
+    //4 fetches for different combinations of filter request initiated when filter checkbox checked/unchecked
+        // all || character || category || character & category
     useEffect(() => {
 
         let character_statement = activeCharacterFilter.join(',')
@@ -79,33 +83,37 @@ const ProductPage = ({ productData,
         }
     }, [activeCategoryFilter, activeCharacterFilter])
 
-        let products = productData.map((product, index) => {
-            return <ProductCard
-                        key={index}
-                        id={product._id}
-                        title={product.title}
-                        price={product.price}
-                        image={product.image}
-                        image_two={product.image2}
-                        character={product.character}
-                        category={product.category}
-                        description={product.description}
-                        orderArray={orderArray}
-                        setOrderArray={setOrderArray}
-                        addItem={addItem}
-                        removeItem={removeItem}
-                        setActiveProduct={setActiveProduct}
-                        view={view}
-                        colourCoordinator={colourCoordinator}
-                        setColourCoordinator={setColourCoordinator}
-                        lastTargetedItem={lastTargetedItem}
-                        setLastTargetedItem={setLastTargetedItem}
-            />
-        })
+    //Iterates through productData array to render individual products with relevant data and functionality
+    let products = productData.map((product, index) => {
+        return <ProductCard
+                    key={index}
+                    id={product._id}
+                    title={product.title}
+                    price={product.price}
+                    image={product.image}
+                    image_two={product.image2}
+                    character={product.character}
+                    category={product.category}
+                    description={product.description}
+                    orderArray={orderArray}
+                    setOrderArray={setOrderArray}
+                    addItem={addItem}
+                    removeItem={removeItem}
+                    setActiveProduct={setActiveProduct}
+                    view={view}
+                    colourCoordinator={colourCoordinator}
+                    setColourCoordinator={setColourCoordinator}
+                    lastTargetedItem={lastTargetedItem}
+                    setLastTargetedItem={setLastTargetedItem}
+        />
+    })
 
+    //Renders products depending on selected view (grid or rows)
+    //Modal renders if "see more" has been selected
     return (
         <div className="product_page">
-            {targeted_product ? <ProductModal
+            {
+                targeted_product ? <ProductModal
                 orderArray={orderArray}
                 setOrderArray={setOrderArray}
                 addItem={addItem}
@@ -118,8 +126,12 @@ const ProductPage = ({ productData,
                 setColourCoordinator={setColourCoordinator}
                 lastTargetedItem={lastTargetedItem}
                 setLastTargetedItem={setLastTargetedItem}
-            /> : ""}
-            {view === "rows" ? <div className="products_rows">{products}</div> : <div className="products_grid"> {products}</div> }
+                /> : ""
+            }
+            {
+                view === "rows" ? <div className="products_rows">{products}</div>
+                    : <div className="products_grid"> {products}</div>
+            }
         </div>
     )
 }

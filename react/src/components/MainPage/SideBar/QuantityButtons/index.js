@@ -15,6 +15,7 @@ const QuantityButtons = ({ id,
     const [quantity, setQuantity] = useState (0)
     const [selectedProductImage, setSelectedProductImage] = useState ("")
 
+    //Calculates selected quantity of individual items in orderArray
     function findQuantity() {
         let itemInOrder = false
         orderArray.forEach(orderItem => {
@@ -30,6 +31,9 @@ const QuantityButtons = ({ id,
 
     useEffect(findQuantity, [orderArray, selectedProductImage])
 
+    //Selects image according to colour state
+        //(assumes at least black, and that image will always be a black product)
+            //(needs to be generalised and dried up)
     function colourCoordinator() {
         if (colour !== "black") {
             setSelectedProductImage(image_two)
@@ -40,6 +44,7 @@ const QuantityButtons = ({ id,
 
     useEffect(colourCoordinator, [colour, orderArray])
 
+    //Renders quantity buttons and props item data to add or remove item functions
     return (
         <>
             <div className="quantity_buttons">

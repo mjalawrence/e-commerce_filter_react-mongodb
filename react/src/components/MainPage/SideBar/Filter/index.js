@@ -7,7 +7,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
     const [capsFilterTitle, setCapsFilterTitle] = useState('')
     const [filterDivs, setFilterDivs] = useState([])
 
-        //fetches data for sidebar title (category/character)
+    //Fetches data for sidebar title (category/character)
     useEffect(() => {
         fetch(`http://localhost:3001/products/${searchType}`)
             .then(response => response.json())
@@ -16,7 +16,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
             })
     }, [])
 
-        //capitalises the title for sidebar and for input
+    //Capitalises the title for sidebar and for input
     useEffect(() => {
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -27,7 +27,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
         }
     }, [filterList])
 
-        //onChange event of ticking a checkbox lifts state of checked filter and the api responds accordingly by displaying relevant products
+    //onChange event of ticking a checkbox lifts state of checked filter and the api responds accordingly by displaying relevant products
     const filterChange = (e) => {
         const selectedValue = e.currentTarget.value
         if (e.currentTarget.name === 'category') {
@@ -47,7 +47,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
         }
     }
 
-        //returns filter lists
+    //Renders filter lists
     useEffect(() => {
         if (Object.keys(filterList).length !== 0) {
             let filters = filterList.map((filter_option, index) => {
@@ -71,6 +71,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
         }
     },[capsFilterTitle])
 
+    //Renders title and filter check boxes
     return (
         <div id={searchType} className="side_bar_text" >
             <div className="title">

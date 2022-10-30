@@ -2,6 +2,7 @@ import ".//ViewControl.scss"
 
 const ViewControl = ({ view, setView }) => {
 
+    //Sets view state: grid or rows
     const viewAsGrid = (e) => {
         setView("grid")
     }
@@ -9,6 +10,7 @@ const ViewControl = ({ view, setView }) => {
         setView("rows")
     }
 
+    //Renders view as box: grid or rows
     return (
         <>
             <div className="view_box">
