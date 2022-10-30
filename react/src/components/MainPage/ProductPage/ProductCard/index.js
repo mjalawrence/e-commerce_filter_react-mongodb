@@ -1,11 +1,12 @@
+import {useEffect, useState} from "react";
 import QuantityButtons from "../../SideBar/QuantityButtons";
 import './ProductCard.scss'
-
 
 const ProductCard = ({ id,
                          title,
                          price,
                          image,
+                         image_two,
                          character,
                          category,
                          description,
@@ -14,11 +15,19 @@ const ProductCard = ({ id,
                          addItem,
                          removeItem,
                          setActiveProduct,
-                         view }) => {
+                         view,
+                         colourCoordinator,
+                         setColourCoordinator,
+                         lastTargetedItem,
+                         setLastTargetedItem }) => {
 
+    const [colour, setColour] = useState("black")
+
+    //makes category and title presentable
     const singular_category = category.slice(0, -1)
     const clean_title = title.replace(singular_category, "")
 
+    //separates description paragraph into individual sentences
     let description_array = description.split(". ")
     let descriptions = description_array.map(description_item => {
         let no_code = description_item.replace(/â€+/g, "'")
@@ -28,34 +37,126 @@ const ProductCard = ({ id,
         }
     })
 
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     //setActiveProduct
     const seeMoreInfo = (e) => {
         setActiveProduct(e.currentTarget.name)
+        setLastTargetedItem(id)
+        setColourCoordinator(colour)
     }
+
+    const selectBlackItem = (e) => {
+        setColour("black")
+        setColourCoordinator("black")
+        setLastTargetedItem(id)
+    }
+
+    const selectWhiteItem = (e) => {
+        setColour("white")
+        setColourCoordinator("white")
+        setLastTargetedItem(id)
+    }
+
+    const selectGrayItem = (e) => {
+        setColour("gray")
+        setColourCoordinator("gray")
+        setLastTargetedItem(id)
+    }
+
+    function coordinateModalAndCardColours() {
+        if (lastTargetedItem === id) {
+            setColour(colourCoordinator)
+        }
+    }
+
+    useEffect(coordinateModalAndCardColours, [lastTargetedItem, colourCoordinator])
 
     //if product is in array then: quantity buttons, if not: 'add to cart' button
     let in_order_array
     for (let i = 0; i < orderArray.length; i++) {
-        if (Object.values(orderArray[i]).includes(id)) {
+        if (Object.values(orderArray[i]).includes(id) && Object.values(orderArray[i]).includes(colour)) {
            in_order_array = true
             break
         }
     }
+
+    function colourSpecificQuantityButtons() {
+        if (colour === "black") {
+            if (in_order_array) {
+                return <QuantityButtons
+                    id={id}
+                    image={image}
+                    character={character}
+                    category={category}
+                    price={price}
+                    colour={colour}
+                    orderArray={orderArray}
+                    setOrderArray={setOrderArray}
+                    addItem={addItem}
+                    removeItem={removeItem}
+                />
+            } else {
+                return <div className="add_to_cart_button"
+                            onClick={() => {addItem(id, image, character, category, price, colour)}}
+            > Add to Cart</div>
+            }
+        } else {
+            if (in_order_array) {
+                return <QuantityButtons
+                    id={id}
+                    image_two={image_two}
+                    character={character}
+                    category={category}
+                    price={price}
+                    colour={colour}
+                    orderArray={orderArray}
+                    setOrderArray={setOrderArray}
+                    addItem={addItem}
+                    removeItem={removeItem}
+                />
+            } else {
+                return <div className="add_to_cart_button"
+                            onClick={() => {addItem(id, image_two, character, category, price, colour)}}
+                > Add to Cart</div>
+            }
+        }
+    }
+
+    let colour_specific_buttons = colourSpecificQuantityButtons()
+
+    function imageSelector(class_variable) {
+        if (colour === "black" || image_two === 'NULL') {
+            return <div className={class_variable} style={{backgroundImage: `url("${image}")`}} />
+        } else {
+            return <div className={class_variable} style={{backgroundImage: `url("${image_two}")`}} />
+        }
+    }
+
+    let product_image_selector = imageSelector("product_image")
+    let row_product_image_selector = imageSelector("row_product_image")
 
     return (
         <>
             {view !== "rows" ?
             <div className="product_card">
                 <div className="product_details">
-                <div className="image_container">
-                    <div className="product_image" style={{backgroundImage: `url("${image}")`}}> </div>
-                    <a
-                        className="see_more_button"
-                        name={id}
-                        onClick={seeMoreInfo}
-                    >See Full Details</a>
-                </div>
+                    <div className="image_container">
+                    {product_image_selector}
+                        <a
+                            className="see_more_button"
+                            name={id}
+                            value={colour}
+                            onClick={seeMoreInfo}
+                        >See Full Details</a>
+                        <div className="colour_box_container">
+                            <div className="colour_box_black" onClick={selectBlackItem} />
+                            {image_two.endsWith("gray.jpg") ? <div className="colour_box_gray" onClick={selectGrayItem} /> : ""}
+                            {image_two.endsWith("white.jpg") ? <div className="colour_box_white" onClick={selectWhiteItem} /> : ""}
+                        </div>
+                    </div>
                     <div className="character_category">
                         <div className="character_box">{character}</div>
                         <div className="category_box">{singular_category}</div>
@@ -63,24 +164,18 @@ const ProductCard = ({ id,
                 </div>
                 <div className="price_qty">
                     <div className="product_price">£{price} </div>
-                    {in_order_array ? <QuantityButtons
-                        id={id}
-                        character={character}
-                        category={category}
-                        price={price}
-                        orderArray={orderArray}
-                        setOrderArray={setOrderArray}
-                        addItem={addItem}
-                        removeItem={removeItem}
-                    /> : <div className="add_to_cart_button"
-                          onClick={() => {addItem(id, image, character, category, price)}}
-                    > Add to Cart</div>}
+                    {colour_specific_buttons}
                 </div>
             </div>
             :
             <div className="product_row">
                 <div className="row_image_container">
-                    <div className="row_product_image" style={{backgroundImage: `url("${image}")`}}> </div>
+                    {row_product_image_selector}
+                    <div className="row_colour_box_container">
+                        <div className="row_colour_box_black" onClick={selectBlackItem} />
+                        {image_two.endsWith("gray.jpg") ? <div className="row_colour_box_gray" onClick={selectGrayItem} /> : ""}
+                        {image_two.endsWith("white.jpg") ? <div className="row_colour_box_white" onClick={selectWhiteItem} /> : ""}
+                    </div>
                 </div>
                 <div className="row_product_info_container">
                     <div className="row_name_title_price">
@@ -92,29 +187,13 @@ const ProductCard = ({ id,
                         </div>
                         <div className="row_price_quantity">
                             <div className="row_price">
-                                £{price}
+                                {capitalizeFirstLetter(colour)} : £{price}
                             </div>
-                            {in_order_array ? <QuantityButtons
-                                id={id}
-                                character={character}
-                                category={category}
-                                price={price}
-                                orderArray={orderArray}
-                                setOrderArray={setOrderArray}
-                                addItem={addItem}
-                                removeItem={removeItem}
-                            /> : <div className="add_to_cart_button"
-                                      onClick={() => {addItem(id, image, character, category, price)}}
-                            > Add to Cart</div>}
+                            {colour_specific_buttons}
                         </div>
                     </div>
                     <div className="row_descriptions">{descriptions}</div>
-
                 </div>
-                    {/*<div className="row_name_price">*/}
-                    {/*    </div>*/}
-                {/*</div>*/}
-            {/*</div>*/}
             </div>
             }
         </>

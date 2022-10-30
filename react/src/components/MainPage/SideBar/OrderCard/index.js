@@ -33,6 +33,16 @@ const OrderCard = ({ orderArray,
         setSubtotal(itemTotal)
     }
 
+    function colourBoxDecider(item) {
+        if (item.endsWith("black.jpg")) {
+            return <div className="order_colour_box_black" />
+        } else if (item.endsWith("gray.jpg")) {
+            return <div className="order_colour_box_gray" />
+        } else if (item.endsWith("white.jpg")) {
+            return <div className="order_colour_box_white" />
+        }
+    }
+
     let ordersDisplay = orderArray.map((orderItem, key) => {
         const singular_category = (orderItem.category).slice(0, -1)
         const quantity_x_price = quantityTimesPrice(orderItem.qty, orderItem.price)
@@ -42,15 +52,19 @@ const OrderCard = ({ orderArray,
                     <div className="remove_item_all" onClick={() => {
                         removeItemAll(orderItem._id, orderItem.character, orderItem.category)
                     }}>X</div>
-                    {orderItem.character} {singular_category}</div>
+                    {orderItem.character} {singular_category}
+                {colourBoxDecider(orderItem.image)}
+                </div>
                 <div className="qty_box">
                 <div className="price_box">£{quantity_x_price} :</div>
                     <QuantityButtons
-                        id={orderItem._id}
+                        id={orderItem.id}
                         image={orderItem.image}
+                        image_two={orderItem.image}
                         character={orderItem.character}
                         category={orderItem.category}
                         price={orderItem.price}
+                        colour={orderItem.colour}
                         orderArray={orderArray}
                         setOrderArray={setOrderArray}
                         addItem={addItem}

@@ -25,10 +25,33 @@
 
 .order {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  justify-content: flex-start; }
+
+.order_colour_box_black {
+  height: 5px;
+  border: white solid 1px;
+  background-color: black;
+  padding: 8px;
+  margin-left: 10px; }
+
+.order_colour_box_gray {
+  height: 5px;
+  border: white solid 1px;
+  padding: 8px;
+  margin-left: 10px;
+  background-color: gray; }
+
+.order_colour_box_white {
+  height: 5px;
+  border: white solid 1px;
+  padding: 8px;
+  margin-left: 10px;
+  background-color: white; }
 
 .remove_item_all {
   margin-right: 5px;
+  height: 20px;
   padding: 0 4px 0 4px;
   border: 1px solid white; }
 

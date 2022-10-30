@@ -34,9 +34,9 @@ const Sorter = ({ productData,
         setSortBy(e.target.value)
     }
 
+    //makes sure filters don't ignore sorter
     useEffect(() => {
         setProductData(sortByProperty(productData, sortBy))
-        console.log('changed')
     }, [resort])
 
     return (

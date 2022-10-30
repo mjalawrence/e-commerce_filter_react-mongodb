@@ -1,8 +1,13 @@
-import QuantityButtons from "../SideBar/QuantityButtons";
 import {useEffect, useState} from "react";
+import QuantityButtons from "../SideBar/QuantityButtons";
 import "./CheckoutPage.scss"
 
-const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, removeItem, removeItemAll }) => {
+const CheckoutPage = ({ orderArray,
+                          setOrderArray,
+                          setActiveCheckout,
+                          addItem,
+                          removeItem,
+                          removeItemAll }) => {
 
     const [subtotal, setSubtotal] = useState(0)
     const [deliveryFee, setDeliveryFee] = useState(0)
@@ -26,6 +31,9 @@ const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, r
         return qty * price
     }
 
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     let ordersDisplay = orderArray.map(orderItem => {
         const singular_category = (orderItem.category).slice(0, -1)
@@ -36,7 +44,7 @@ const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, r
                 <td className="checkout_product_details">
                     <div className="checkout_product_image" style={{backgroundImage: `url("${orderItem.image}")`}}> </div>
                     <div className="checkout_title_container">
-                        <p className="checkout_product_name">{orderItem.character} {singular_category}</p>
+                        <p className="checkout_product_name">{orderItem.character} : {singular_category} : {capitalizeFirstLetter(orderItem.colour)}</p>
                         <div className="checkout_remove_button" onClick={() => {
                             removeItemAll(orderItem.id, orderItem.character, orderItem.category)
                         }}>Remove</div>
@@ -47,9 +55,12 @@ const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, r
                     <div className="checkout_quantity_container">
                         <QuantityButtons
                                 id={orderItem.id}
+                                image={orderItem.image}
+                                image_two={orderItem.image}
                                 character={orderItem.character}
                                 category={orderItem.category}
                                 price={orderItem.price}
+                                colour={orderItem.colour}
                                 orderArray={orderArray}
                                 setOrderArray={setOrderArray}
                                 addItem={addItem}
@@ -69,6 +80,16 @@ const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, r
 
     return (
         <>
+            {!orderArray.length ?
+                <div className="checkout_cart">
+                    <h1 className="checkout_title"> Your cart is empty</h1>
+                    <div className="return_button_container">
+                        <a className="return_to_shop_button" onClick={() => {setActiveCheckout(false)}}>
+                            Return to Shop
+                        </a>
+                    </div>
+                </div>
+                :
             <div className="checkout_cart">
                 <h1 className="checkout_title"> Your Cart</h1>
                 <table>
@@ -104,7 +125,7 @@ const CheckoutPage = ({ orderArray, setOrderArray, setActiveCheckout, addItem, r
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> }
         </>
     )
 }

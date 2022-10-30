@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
-import ".//ProductPage.scss"
 import ProductCard from "./ProductCard"
 import ProductModal from "./ProductModal";
+import ".//ProductPage.scss"
 
 const ProductPage = ({ productData,
                          setProductData,
@@ -16,6 +16,8 @@ const ProductPage = ({ productData,
                          setResort,
                          view }) => {
 
+    const [colourCoordinator, setColourCoordinator] = useState("black")
+    const [lastTargetedItem, setLastTargetedItem] = useState('')
 
     //gathers product data with which to populate modal
     let targeted_product
@@ -84,6 +86,7 @@ const ProductPage = ({ productData,
                         title={product.title}
                         price={product.price}
                         image={product.image}
+                        image_two={product.image2}
                         character={product.character}
                         category={product.category}
                         description={product.description}
@@ -93,6 +96,10 @@ const ProductPage = ({ productData,
                         removeItem={removeItem}
                         setActiveProduct={setActiveProduct}
                         view={view}
+                        colourCoordinator={colourCoordinator}
+                        setColourCoordinator={setColourCoordinator}
+                        lastTargetedItem={lastTargetedItem}
+                        setLastTargetedItem={setLastTargetedItem}
             />
         })
 
@@ -107,6 +114,10 @@ const ProductPage = ({ productData,
                 setActiveProduct={setActiveProduct}
                 targetedProductData={targeted_product}
                 inOrderArray={in_order_array}
+                colourCoordinator={colourCoordinator}
+                setColourCoordinator={setColourCoordinator}
+                lastTargetedItem={lastTargetedItem}
+                setLastTargetedItem={setLastTargetedItem}
             /> : ""}
             {view === "rows" ? <div className="products_rows">{products}</div> : <div className="products_grid"> {products}</div> }
         </div>

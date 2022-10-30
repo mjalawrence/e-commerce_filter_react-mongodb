@@ -1,8 +1,8 @@
-import {useState, useEffect} from "react"
-import ".//MainPage.scss"
+import {useState} from "react"
 import CheckoutPage from "./CheckoutPage";
 import ProductPage from "./ProductPage";
 import SideBar from "./SideBar";
+import ".//MainPage.scss"
 
 const MainPage = () => {
 
@@ -15,12 +15,12 @@ const MainPage = () => {
     const [resort, setResort] = useState([])
     const [view, setView] = useState("grid")
 
-    const addItem = (id, image, character, category, price) => {
+    const addItem = (id, image, character, category, price, colour) => {
         let orderArrayClone = [...orderArray]
-        const orderArrayItem = {id, image, character, category, price, qty: 1}
+        const orderArrayItem = {id, image, character, category, price, colour, qty: 1}
         let itemOrdered = false
         orderArray.forEach((orderItem, key) => {
-            if (orderItem.character === character && orderItem.category === category) {
+            if (orderItem.image === image && orderItem.id === id) {
                 itemOrdered = key
             }
         })
@@ -32,12 +32,12 @@ const MainPage = () => {
         setOrderArray(orderArrayClone)
     }
 
-    const removeItem = (id, character, category) => {
+    const removeItem = (id, image) => {
         let orderArrayClone = [...orderArray]
         let itemOrdered = false
         orderArray.forEach((orderItem, key) => {
-            if (orderItem.character === character && orderItem.category === category) {
-                itemOrdered = key
+            if (orderItem.image === image && orderItem.id === id) {
+                    itemOrdered = key
             }
         })
         if (itemOrdered !== false) {
