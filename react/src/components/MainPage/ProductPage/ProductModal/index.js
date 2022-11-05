@@ -14,7 +14,7 @@ const ProductModal = ({ activeProduct,
                           lastTargetedItem,
                           setLastTargetedItem }) => {
 
-    const [colour, setColour] = useState("black")
+    const [colour, setColour] = useState("")
 
     //Closes modal when close-button or modal surroundings clicked
     const closeModal = (e) => {
@@ -40,26 +40,51 @@ const ProductModal = ({ activeProduct,
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-//Changes colour of item
-    // also required set states for coordinating colours of productModal and productCard
-//(I plan to dry this up a bit to accommodate possibility of other colours, MVP at the mo)
-    const selectBlackItem = (e) => {
-        setColour("black")
-        setColourCoordinator("black")
-        setLastTargetedItem(targetedProductData._id)
+    //Isolates the colour.jpeg at the end of the item's image url
+    function determineItemColour(url) {
+        const colour_jpeg = url.substring(url.lastIndexOf('-') + 1)
+        return colour_jpeg.split(".")[0]
     }
 
-    const selectWhiteItem = (e) => {
-        setColour("white")
-        setColourCoordinator("white")
-        setLastTargetedItem(targetedProductData._id)
+    //The image's colour and then declares a className using that colour
+    let image_one_colour = determineItemColour(targetedProductData.image)
+    let image_one_class_name = "modal_colour_box_" + image_one_colour
+
+    // Sets state with item colour for coordinating colours of productModal and productCard
+    const selectColourOfImageOne = (e) => {
+        if (image_one_colour)  {
+            setColour(image_one_colour)
+            setColourCoordinator(image_one_colour)
+            setLastTargetedItem(targetedProductData._id)
+        }
+    }
+    useEffect(selectColourOfImageOne, [])
+
+    //Same as above for image_two
+    let image_two_colour = determineItemColour(targetedProductData.image2)
+    let image_two_class_name = "modal_colour_box_" + image_two_colour
+
+    const selectColourOfImageTwo = (e) => {
+        if (image_two_colour)  {
+            setColour(image_two_colour)
+            setColourCoordinator(image_two_colour)
+            setLastTargetedItem(targetedProductData._id)
+        }
     }
 
-    const selectGrayItem = (e) => {
-        setColour("gray")
-        setColourCoordinator("gray")
-        setLastTargetedItem(targetedProductData._id)
-    }
+    //Same as above for image_three
+    //haven't yet propped image_three (only one item in db has third image)
+    // let image_three_colour = determineItemColour(image_three)
+    // let image_three_class_name = "colour_box_" + image_three_colour
+    // let image_three_row_class_name = "row_colour_box_" + image_three_colour
+    //
+    // const selectColourOfImageThree = (e) => {
+    //     if (image_three_colour)  {
+    //         setColour(image_three_colour)
+    //         setColourCoordinator(image_three_colour)
+    //         setLastTargetedItem(id)
+    //     }
+    // }
 
     //Makes sure item colour of selected product changes and does not apply to all products
     function coordinateModalAndCardColours() {
@@ -80,60 +105,38 @@ const ProductModal = ({ activeProduct,
         }
     }
 
-    //Renders Quantity Buttons that relate to specific item colours
-        //(currently assumes all products are at least black, thus needs to be generalised and dried up)
-    function colourSpecificQuantityButtons() {
-        if (colour === "black") {
-            if (in_order_array) {
-                return <QuantityButtons
-                    id={targetedProductData._id}
-                    image={targetedProductData.image}
-                    character={targetedProductData.character}
-                    category={targetedProductData.category}
-                    price={targetedProductData.price}
-                    colour={colour}
-                    orderArray={orderArray}
-                    setOrderArray={setOrderArray}
-                    addItem={addItem}
-                    removeItem={removeItem}
-                />
-            } else {
-                return <div className="add_to_cart_button"
-                            onClick={() => {addItem(targetedProductData._id, targetedProductData.image, targetedProductData.character, targetedProductData.category, targetedProductData.price, colour)}}
-                > Add to Cart</div>
-            }
+    //If not in orderArray: renders Add To Cart button. If in array: renders quantity buttons
+    function quantityButtons(item_image) {
+        if (in_order_array) {
+            return <QuantityButtons
+                id={targetedProductData._id}
+                image={item_image}
+                image_two={item_image}
+                character={targetedProductData.character}
+                category={targetedProductData.category}
+                price={targetedProductData.price}
+                colour={colour}
+                orderArray={orderArray}
+                setOrderArray={setOrderArray}
+                addItem={addItem}
+                removeItem={removeItem}
+            />
         } else {
-            if (in_order_array) {
-                return <QuantityButtons
-                    id={targetedProductData._id}
-                    image_two={targetedProductData.image2}
-                    character={targetedProductData.character}
-                    category={targetedProductData.category}
-                    price={targetedProductData.price}
-                    colour={colour}
-                    orderArray={orderArray}
-                    setOrderArray={setOrderArray}
-                    addItem={addItem}
-                    removeItem={removeItem}
-                />
-            } else {
-                return <div className="add_to_cart_button"
-                            onClick={() => {addItem(targetedProductData._id, targetedProductData.image2, targetedProductData.character, targetedProductData.category, targetedProductData.price, colour)}}
-                > Add to Cart</div>
-            }
+            return <div className="add_to_cart_button"
+                        onClick={() => {addItem(targetedProductData._id, item_image, targetedProductData.character, targetedProductData.category, targetedProductData.price, colour)}}
+            > Add to Cart</div>
         }
     }
 
-    let colour_specific_buttons = colourSpecificQuantityButtons()
-    let image_two = targetedProductData.image2
-
+    //Renders Quantity Buttons/Add To Cart button that relate to specific item colours
+    let image_one_quantity_buttons = quantityButtons(targetedProductData.image)
+    let image_two_quantity_buttons = quantityButtons(targetedProductData.image2)
 
     //Decides the product image based on the colour useState
-        //(Again assumes all products at least black: needs generalising and drying up)
     function imageSelector() {
-        if (colour === "black" || targetedProductData.image2 === 'NULL') {
+        if (colour === image_one_colour || colour === "") {
             return <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image}")`}} />
-        } else {
+        } else if (colour === image_two_colour) {
             return <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image2}")`}} />
         }
     }
@@ -150,9 +153,8 @@ const ProductModal = ({ activeProduct,
                 <div className="modal_image_container">
                     {image_selector}
                     <div className="modal_colour_box_container">
-                        <div className="modal_colour_box_black" onClick={selectBlackItem} />
-                        {image_two.endsWith("gray.jpg") ? <div className="modal_colour_box_gray" onClick={selectGrayItem} /> : ""}
-                        {image_two.endsWith("white.jpg") ? <div className="modal_colour_box_white" onClick={selectWhiteItem} /> : ""}
+                        <div className={image_one_class_name} onClick={selectColourOfImageOne} />
+                        <div className={image_two_class_name} onClick={selectColourOfImageTwo} />
                     </div>
                 </div>
                 <div className="product_text">
@@ -164,8 +166,9 @@ const ProductModal = ({ activeProduct,
                     {descriptions}
                     <div className="modal_price_qty">
                         <div className="modal_price">£{targetedProductData.price} : {capitalizeFirstLetter(colour)}</div>
-                        {colour_specific_buttons}
-                    </div>
+                            {image_one_colour === colour ? image_one_quantity_buttons : ""}
+                            {image_two_colour === colour ? image_two_quantity_buttons : ""}
+                        </div>
                 </div>
             </div>
         </>

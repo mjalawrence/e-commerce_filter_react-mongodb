@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  },
+  "name": "robo-merch_e-commerce_app",
+  "version": "0.1.0",
+  "homepage": "https://mjalawrence.github.io/e-commerce_filter_react-mongodb/",
+  "private": true,
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "command": "^0.0.5",
+    "react-scripts": "^5.0.1"
+  }
+}
