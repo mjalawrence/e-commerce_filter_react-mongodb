@@ -73,7 +73,6 @@ const MainPage = () => {
         setActiveProduct([])
     }
 
-
     //render Sidebar, ProductPage, and CheckoutPage when activated
     return (
         <>

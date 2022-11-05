@@ -31,14 +31,20 @@ const QuantityButtons = ({ id,
 
     useEffect(findQuantity, [orderArray, selectedProductImage])
 
+    function determineItemColour(url) {
+        const colour_jpeg = url.substring(url.lastIndexOf('-') + 1)
+        return colour_jpeg.split(".")[0]
+    }
+
+    let image_one_colour = determineItemColour(image)
+    let image_two_colour = determineItemColour(image_two)
+
     //Selects image according to colour state
-        //(assumes at least black, and that image will always be a black product)
-            //(needs to be generalised and dried up)
     function colourCoordinator() {
-        if (colour !== "black") {
-            setSelectedProductImage(image_two)
-        } else {
+        if (colour === image_one_colour) {
             setSelectedProductImage(image)
+        } else if (colour === image_two_colour) {
+            setSelectedProductImage(image_two)
         }
     }
 
