@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,oBAAqB;EACnB,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;;AAGjB,oBAAqB;EACnB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,aAAa;;AAGhC,kBAAmB;EACjB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,aAAa",
+"sources": ["SideBar.scss"],
 "names": [],
 "file": "SideBar.css"
 }

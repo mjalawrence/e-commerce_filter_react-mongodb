@@ -1,9 +1,7 @@
 .reset_div {
-  position: fixed;
-  top: 450px;
-  width: 24vw;
-  text-align: center;
-  margin: 10px; }
+  display: flex;
+  justify-content: center;
+  margin: 1px; }
 
 .reset_filters {
   background-color: black;

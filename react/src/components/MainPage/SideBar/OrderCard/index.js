@@ -87,25 +87,27 @@ const OrderCard = ({ orderArray,
     //renders mini-cart with subtotal and "proceed to checkout" button
     return (
         <>
-            <div className="cart_box">
-                <div className="cart_title">
-                    {orderArray.length ? "Cart (" + itemsInTotal + " items)" : "Cart"}
-                </div>
-                <div className="orders">
-                    {orderArray.length ? ordersDisplay : "Currently Empty"}
-                </div>
-                <div className="subtotal_box">
-                    <div className="subtotal">
-                        Subtotal:
+            <div className="cart_container">
+                <div className="cart_box">
+                    <div className="cart_title">
+                        {orderArray.length ? "Cart (" + itemsInTotal + " items)" : "Cart"}
                     </div>
-                    <div className="subtotal">
-                        £{subtotal}
+                    <div className="orders">
+                        {orderArray.length ? ordersDisplay : "Currently Empty"}
                     </div>
-                </div>
-                <div className="checkout_button_container">
-                    {orderArray.length ? <a className="checkout_button" onClick={() => {setActiveCheckout(true)}}>
-                        Proceed to Checkout
-                    </a> : ""}
+                    <div className="subtotal_box">
+                        <div className="subtotal">
+                            Subtotal:
+                        </div>
+                        <div className="subtotal">
+                            £{subtotal}
+                        </div>
+                    </div>
+                    <div className="checkout_button_container">
+                        {orderArray.length ? <a className="checkout_button" onClick={() => {setActiveCheckout(true)}}>
+                            Proceed to Checkout
+                        </a> : ""}
+                    </div>
                 </div>
             </div>
         </>

@@ -1,11 +1,13 @@
+.cart_container {
+  display: flex;
+  justify-content: center; }
+
 .cart_box {
-  position: fixed;
-  top: 495px;
-  width: 23vw;
+  flex: 1;
   border: solid 1px white;
   text-align: left;
   padding: 10px;
-  margin: 10px;
+  margin: 3px;
   background-color: black; }
 
 .cart_title {
@@ -13,7 +15,7 @@
   font-size: 25px; }
 
 .orders {
-  height: 13vw;
+  height: 10vw;
   overflow: auto; }
 
 .order_box {

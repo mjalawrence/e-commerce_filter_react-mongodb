@@ -73,7 +73,7 @@ const Filter = ({searchType, setActiveCategoryFilter, setActiveCharacterFilter, 
 
     //Renders title and filter check boxes
     return (
-        <div id={searchType} className="side_bar_text" >
+        <div id={searchType} className="filter_container" >
             <div className="title">
                 {capsFilterTitle}
             </div>
