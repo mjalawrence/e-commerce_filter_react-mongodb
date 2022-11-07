@@ -58,7 +58,7 @@ const ProductModal = ({ activeProduct,
             setLastTargetedItem(targetedProductData._id)
         }
     }
-    useEffect(selectColourOfImageOne, [])
+    // useEffect(selectColourOfImageOne, [])
 
     //Same as above for image_two
     let image_two_colour = determineItemColour(targetedProductData.image2)

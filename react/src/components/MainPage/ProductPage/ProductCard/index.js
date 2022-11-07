@@ -46,8 +46,6 @@ const ProductCard = ({ id,
         //also necessary set states for coordinating colours of productModal and productCard
     const seeMoreInfo = (e) => {
         setActiveProduct(e.currentTarget.name)
-        setLastTargetedItem(id)
-        setColourCoordinator(colour)
     }
 
     //Isolates the colour.jpeg at the end of the item's image url

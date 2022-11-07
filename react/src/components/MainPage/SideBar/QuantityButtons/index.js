@@ -40,7 +40,7 @@ const QuantityButtons = ({ id,
     let image_two_colour = determineItemColour(image_two)
 
     //Selects image according to colour state
-    function colourCoordinator() {
+    function imageCoordinator() {
         if (colour === image_one_colour) {
             setSelectedProductImage(image)
         } else if (colour === image_two_colour) {
@@ -48,7 +48,7 @@ const QuantityButtons = ({ id,
         }
     }
 
-    useEffect(colourCoordinator, [colour, orderArray])
+    useEffect(imageCoordinator, [colour, orderArray])
 
     //Renders quantity buttons and props item data to add or remove item functions
     return (

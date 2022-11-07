@@ -18,7 +18,7 @@ const ProductPage = ({ productData,
 
     //Both useStates required for coordinating item colour of productCard and productModal
     const [colourCoordinator, setColourCoordinator] = useState("")
-    const [lastTargetedItem, setLastTargetedItem] = useState('')
+    const [lastTargetedItem, setLastTargetedItem] = useState("")
 
     //Iterates through productData array looking for selected product
         //Fills targeted_product with product data to populate modal
