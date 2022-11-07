@@ -54,47 +54,38 @@ const ProductCard = ({ id,
         return colour_jpeg.split(".")[0]
     }
 
-    //The image's colour and then declares a className using that colour
-    let image_one_colour = determineItemColour(image)
-    let image_one_class_name = "colour_box_" + image_one_colour
-    let image_one_row_class_name = "row_colour_box_" + image_one_colour
+    //Sets default colour as first image in product object
+    useEffect(() => {
+        let first_item_colour = determineItemColour(image)
+        setColour(first_item_colour)
+    }, [])
 
-    // Sets state with item colour for coordinating colours of productModal and productCard
-    const selectColourOfImageOne = (e) => {
-        if (image_one_colour)  {
-            setColour(image_one_colour)
-            setColourCoordinator(image_one_colour)
-            setLastTargetedItem(id)
+    //Identifies item colour to produce corresponding classNames
+        //and appropriate set states for colour, colour coordinator and last targeted item
+            //Returns clickable boxes for selecting item colour
+    function itemColourProcessor(inputted_image) {
+        let image_colour = determineItemColour(inputted_image)
+        let image_class_name = "colour_box_" + image_colour
+        let image_row_class_name = "row_colour_box_" + image_colour
+        const selectItemColour = () => {
+            if (image_colour) {
+                setColour(image_colour)
+                setColourCoordinator(image_colour)
+                setLastTargetedItem(id)
+            }
+        }
+        if (view !== "rows") {
+            return <div className={image_class_name} onClick={selectItemColour} />
+        } else {
+            return <div className={image_row_class_name} onClick={selectItemColour} />
         }
     }
-    useEffect(selectColourOfImageOne, [])
 
-    //Same as above for image_two
-    let image_two_colour = determineItemColour(image_two)
-    let image_two_class_name = "colour_box_" + image_two_colour
-    let image_two_row_class_name = "row_colour_box_" + image_two_colour
+    let item_one_processor = itemColourProcessor(image)
+    let item_two_processor= itemColourProcessor(image_two)
+    // possible for loop for uber dryness/allowing the possibility of infinite colours
+    // let item_three_processor= itemColourProcessor(image_three)
 
-    const selectColourOfImageTwo = (e) => {
-        if (image_two_colour)  {
-            setColour(image_two_colour)
-            setColourCoordinator(image_two_colour)
-            setLastTargetedItem(id)
-        }
-    }
-
-    //Same as above for image_three
-        //haven't yet propped image_three (only one item in db has third image)
-    // let image_three_colour = determineItemColour(image_three)
-    // let image_three_class_name = "colour_box_" + image_three_colour
-    // let image_three_row_class_name = "row_colour_box_" + image_three_colour
-    //
-    // const selectColourOfImageThree = (e) => {
-    //     if (image_three_colour)  {
-    //         setColour(image_three_colour)
-    //         setColourCoordinator(image_three_colour)
-    //         setLastTargetedItem(id)
-    //     }
-    // }
 
     //Makes sure item colour of selected product changes and does not apply to all products
     function coordinateModalAndCardColours() {
@@ -141,6 +132,11 @@ const ProductCard = ({ id,
     let image_one_quantity_buttons = quantityButtons(image)
     let image_two_quantity_buttons = quantityButtons(image_two)
 
+    //Used to identify item colour and coordinate with image and quantity buttons
+    let image_one_colour = determineItemColour(image)
+    let image_two_colour = determineItemColour(image_two)
+    // let image_three_colour = determineItemColour(image_three)
+
     //Decides the product image based on the colour useState
     function imageSelector(class_variable) {
         if (colour === image_one_colour || colour === "") {
@@ -170,8 +166,8 @@ const ProductCard = ({ id,
                             onClick={seeMoreInfo}
                         >See Full Details</a>
                         <div className="colour_box_container">
-                            <div className={image_one_class_name} onClick={selectColourOfImageOne} />
-                            <div className={image_two_class_name} onClick={selectColourOfImageTwo} />
+                            {item_one_processor}
+                            {item_two_processor}
                         </div>
                     </div>
                     <div className="character_category">
@@ -192,8 +188,8 @@ const ProductCard = ({ id,
                 <div className="row_image_container">
                     {row_product_image_selector}
                     <div className="row_colour_box_container">
-                        <div className={image_one_row_class_name} onClick={selectColourOfImageOne} />
-                        <div className={image_two_row_class_name} onClick={selectColourOfImageTwo} />
+                        {item_one_processor}
+                        {item_two_processor}
                     </div>
                 </div>
                 <div className="row_product_info_container">

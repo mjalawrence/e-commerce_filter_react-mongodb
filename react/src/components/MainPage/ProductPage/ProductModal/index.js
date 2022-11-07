@@ -46,45 +46,30 @@ const ProductModal = ({ activeProduct,
         return colour_jpeg.split(".")[0]
     }
 
-    //The image's colour and then declares a className using that colour
-    let image_one_colour = determineItemColour(targetedProductData.image)
-    let image_one_class_name = "modal_colour_box_" + image_one_colour
+    //Sets default colour as first image in product object
+    useEffect(() => {
+        let first_item_colour = determineItemColour(targetedProductData.image)
+        setColour(first_item_colour)
+    }, [])
 
-    // Sets state with item colour for coordinating colours of productModal and productCard
-    const selectColourOfImageOne = (e) => {
-        if (image_one_colour)  {
-            setColour(image_one_colour)
-            setColourCoordinator(image_one_colour)
-            setLastTargetedItem(targetedProductData._id)
+    //Identifies item colour to produce corresponding classNames
+        //and appropriate set states for colour, colour coordinator and last targeted item
+            //Returns clickable boxes for selecting item colour
+    function itemColourProcessor(inputted_image) {
+        let image_colour = determineItemColour(inputted_image)
+        let image_class_name = "modal_colour_box_" + image_colour
+        const selectItemColour = () => {
+            if (image_colour) {
+                setColour(image_colour)
+                setColourCoordinator(image_colour)
+                setLastTargetedItem(targetedProductData._id)
+            }
         }
-    }
-    // useEffect(selectColourOfImageOne, [])
-
-    //Same as above for image_two
-    let image_two_colour = determineItemColour(targetedProductData.image2)
-    let image_two_class_name = "modal_colour_box_" + image_two_colour
-
-    const selectColourOfImageTwo = (e) => {
-        if (image_two_colour)  {
-            setColour(image_two_colour)
-            setColourCoordinator(image_two_colour)
-            setLastTargetedItem(targetedProductData._id)
-        }
+        return <div className={image_class_name} onClick={selectItemColour} />
     }
 
-    //Same as above for image_three
-    //haven't yet propped image_three (only one item in db has third image)
-    // let image_three_colour = determineItemColour(image_three)
-    // let image_three_class_name = "colour_box_" + image_three_colour
-    // let image_three_row_class_name = "row_colour_box_" + image_three_colour
-    //
-    // const selectColourOfImageThree = (e) => {
-    //     if (image_three_colour)  {
-    //         setColour(image_three_colour)
-    //         setColourCoordinator(image_three_colour)
-    //         setLastTargetedItem(id)
-    //     }
-    // }
+    let item_one_processor = itemColourProcessor(targetedProductData.image)
+    let item_two_processor= itemColourProcessor(targetedProductData.image2)
 
     //Makes sure item colour of selected product changes and does not apply to all products
     function coordinateModalAndCardColours() {
@@ -132,6 +117,10 @@ const ProductModal = ({ activeProduct,
     let image_one_quantity_buttons = quantityButtons(targetedProductData.image)
     let image_two_quantity_buttons = quantityButtons(targetedProductData.image2)
 
+    //Used to identify item colour and coordinate with image and quantity buttons
+    let image_one_colour = determineItemColour(targetedProductData.image)
+    let image_two_colour = determineItemColour(targetedProductData.image2)
+
     //Decides the product image based on the colour useState
     function imageSelector() {
         if (colour === image_one_colour || colour === "") {
@@ -153,8 +142,8 @@ const ProductModal = ({ activeProduct,
                 <div className="modal_image_container">
                     {image_selector}
                     <div className="modal_colour_box_container">
-                        <div className={image_one_class_name} onClick={selectColourOfImageOne} />
-                        <div className={image_two_class_name} onClick={selectColourOfImageTwo} />
+                        {item_one_processor}
+                        {item_two_processor}
                     </div>
                 </div>
                 <div className="product_text">
