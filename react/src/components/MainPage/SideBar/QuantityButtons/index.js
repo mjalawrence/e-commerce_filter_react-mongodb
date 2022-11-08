@@ -3,7 +3,6 @@ import "./QuantityButtons.scss"
 
 const QuantityButtons = ({ id,
                              image,
-                             image_two,
                              character,
                              category,
                              price,
@@ -36,15 +35,11 @@ const QuantityButtons = ({ id,
         return colour_jpeg.split(".")[0]
     }
 
-    let image_one_colour = determineItemColour(image)
-    let image_two_colour = determineItemColour(image_two)
-
     //Selects image according to colour state
     function imageCoordinator() {
-        if (colour === image_one_colour) {
+        let image_colour = determineItemColour(image)
+        if (colour === image_colour) {
             setSelectedProductImage(image)
-        } else if (colour === image_two_colour) {
-            setSelectedProductImage(image_two)
         }
     }
 

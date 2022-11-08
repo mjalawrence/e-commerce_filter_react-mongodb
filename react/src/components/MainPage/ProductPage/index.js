@@ -92,6 +92,7 @@ const ProductPage = ({ productData,
                     price={product.price}
                     image={product.image}
                     image_two={product.image2}
+                    image_three={product.image3}
                     character={product.character}
                     category={product.category}
                     description={product.description}

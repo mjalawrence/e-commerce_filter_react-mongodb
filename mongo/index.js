@@ -1,4 +1,6 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
 const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient
 const ObjectId = require('mongodb').ObjectId
@@ -8,6 +10,11 @@ const port = 3001
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({extended: true}))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const url = "mongodb://root:password@localhost:27017"
 
@@ -156,7 +163,7 @@ app.delete('/products/:id', async (req, res) => {
     }
 })
 
-// - This route should return either only characters, categories or 1 combination of the two
+// - This route should return either only characters, categories or a combination of the two
 app.get('/products', async (req, res) => {
 
     let project_stmt = {}
@@ -213,24 +220,31 @@ app.get('/products/character', async (req, res) => {
 })
 
 // - Create an endpoint for adding a product to a basket.
-// This should be a POST request that gets sent a user id, a product _id, name and price
-app.post('/products/basket', async(req, res) => {
+                // This should be a POST request that gets sent a user id, a product _id, name and price
+app.post('/basket', async(req, res) => {
 
-    const userId = {
-        id: req.body.id
+    const documentPopulator = () => {
+        let dataToInsert = {
+            user_id: req.body.user_id,
+
+        }
+        for (let i = 1; i < Object.keys(req.body).length; i++) {
+            Object.assign(dataToInsert,
+                {
+                    [`item${i}`] : req.body[`item${i}`]
+                }
+            )
+        }
+        return dataToInsert
     }
 
-    const dataToInsert = {
-        id: req.body.id,
-        title: req.body.title,
-        price: req.body.price,
-    }
+    let data_to_insert = documentPopulator()
 
     const connection = await MongoClient.connect(url)
     const db = connection.db('e-commerce')
-    const collection = db.collection('products')
+    const collection = db.collection('orders')
 
-    const result = await collection.insertOne(dataToInsert)
+    const result = await collection.insertOne(data_to_insert)
 
     let jsonResponse = getJsonFormat()
 

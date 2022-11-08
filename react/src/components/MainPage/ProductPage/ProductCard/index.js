@@ -7,6 +7,7 @@ const ProductCard = ({ id,
                          price,
                          image,
                          image_two,
+                         image_three,
                          character,
                          category,
                          description,
@@ -82,7 +83,8 @@ const ProductCard = ({ id,
     }
 
     let item_one_processor = itemColourProcessor(image)
-    let item_two_processor= itemColourProcessor(image_two)
+    let item_two_processor = itemColourProcessor(image_two)
+    let item_three_processor = itemColourProcessor(image_three)
     // possible for loop for uber dryness/allowing the possibility of infinite colours
     // let item_three_processor= itemColourProcessor(image_three)
 
@@ -111,7 +113,6 @@ const ProductCard = ({ id,
             return <QuantityButtons
                 id={id}
                 image={item_image}
-                image_two={item_image}
                 character={character}
                 category={category}
                 price={price}
@@ -131,11 +132,12 @@ const ProductCard = ({ id,
     //Renders Quantity Buttons/Add To Cart button that relate to specific item colours
     let image_one_quantity_buttons = quantityButtons(image)
     let image_two_quantity_buttons = quantityButtons(image_two)
+    let image_three_quantity_buttons = quantityButtons(image_three)
 
     //Used to identify item colour and coordinate with image and quantity buttons
     let image_one_colour = determineItemColour(image)
     let image_two_colour = determineItemColour(image_two)
-    // let image_three_colour = determineItemColour(image_three)
+    let image_three_colour = determineItemColour(image_three)
 
     //Decides the product image based on the colour useState
     function imageSelector(class_variable) {
@@ -143,6 +145,8 @@ const ProductCard = ({ id,
             return <div className={class_variable} style={{backgroundImage: `url("${image}")`}} />
         } else if (colour === image_two_colour) {
             return <div className={class_variable} style={{backgroundImage: `url("${image_two}")`}} />
+        } else if (colour === image_three_colour) {
+            return <div className={class_variable} style={{backgroundImage: `url("${image_three}")`}} />
         }
     }
 
@@ -168,6 +172,7 @@ const ProductCard = ({ id,
                         <div className="colour_box_container">
                             {item_one_processor}
                             {item_two_processor}
+                            {item_three_processor}
                         </div>
                     </div>
                     <div className="character_category">
@@ -179,6 +184,7 @@ const ProductCard = ({ id,
                     <div className="product_price">£{price} </div>
                     {image_one_colour === colour ? image_one_quantity_buttons : ""}
                     {image_two_colour === colour ? image_two_quantity_buttons : ""}
+                    {image_three_colour === colour ? image_three_quantity_buttons : ""}
                 </div>
             </div>
 
@@ -190,6 +196,7 @@ const ProductCard = ({ id,
                     <div className="row_colour_box_container">
                         {item_one_processor}
                         {item_two_processor}
+                        {item_three_processor}
                     </div>
                 </div>
                 <div className="row_product_info_container">
@@ -206,6 +213,7 @@ const ProductCard = ({ id,
                             </div>
                             {image_one_colour === colour ? image_one_quantity_buttons : ""}
                             {image_two_colour === colour ? image_two_quantity_buttons : ""}
+                            {image_three_colour === colour ? image_three_quantity_buttons : ""}
                         </div>
                     </div>
                     <div className="row_descriptions">{descriptions}</div>

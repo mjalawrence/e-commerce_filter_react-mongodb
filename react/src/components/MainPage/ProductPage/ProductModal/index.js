@@ -70,6 +70,7 @@ const ProductModal = ({ activeProduct,
 
     let item_one_processor = itemColourProcessor(targetedProductData.image)
     let item_two_processor= itemColourProcessor(targetedProductData.image2)
+    let item_three_processor= itemColourProcessor(targetedProductData.image3)
 
     //Makes sure item colour of selected product changes and does not apply to all products
     function coordinateModalAndCardColours() {
@@ -96,7 +97,6 @@ const ProductModal = ({ activeProduct,
             return <QuantityButtons
                 id={targetedProductData._id}
                 image={item_image}
-                image_two={item_image}
                 character={targetedProductData.character}
                 category={targetedProductData.category}
                 price={targetedProductData.price}
@@ -116,10 +116,12 @@ const ProductModal = ({ activeProduct,
     //Renders Quantity Buttons/Add To Cart button that relate to specific item colours
     let image_one_quantity_buttons = quantityButtons(targetedProductData.image)
     let image_two_quantity_buttons = quantityButtons(targetedProductData.image2)
+    let image_three_quantity_buttons = quantityButtons(targetedProductData.image3)
 
     //Used to identify item colour and coordinate with image and quantity buttons
     let image_one_colour = determineItemColour(targetedProductData.image)
     let image_two_colour = determineItemColour(targetedProductData.image2)
+    let image_three_colour = determineItemColour(targetedProductData.image3)
 
     //Decides the product image based on the colour useState
     function imageSelector() {
@@ -127,6 +129,8 @@ const ProductModal = ({ activeProduct,
             return <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image}")`}} />
         } else if (colour === image_two_colour) {
             return <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image2}")`}} />
+        } else if (colour === image_three_colour) {
+            return <div className="modal_image" style={{backgroundImage: `url("${targetedProductData.image3}")`}} />
         }
     }
 
@@ -144,6 +148,7 @@ const ProductModal = ({ activeProduct,
                     <div className="modal_colour_box_container">
                         {item_one_processor}
                         {item_two_processor}
+                        {item_three_processor}
                     </div>
                 </div>
                 <div className="product_text">
@@ -157,6 +162,7 @@ const ProductModal = ({ activeProduct,
                         <div className="modal_price">£{targetedProductData.price} : {capitalizeFirstLetter(colour)}</div>
                             {image_one_colour === colour ? image_one_quantity_buttons : ""}
                             {image_two_colour === colour ? image_two_quantity_buttons : ""}
+                            {image_three_colour === colour ? image_three_quantity_buttons : ""}
                         </div>
                 </div>
             </div>

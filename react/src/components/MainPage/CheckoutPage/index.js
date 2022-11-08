@@ -38,11 +38,40 @@ const CheckoutPage = ({ orderArray,
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    function handleSubmitData(e) {
+        let data_body = {
+            "user_id" : "mikey boi",
+        }
+        for (let i = 0; i < orderArray.length; i++) {
+            Object.assign(data_body,
+                {
+                    [`item${i+1}`]: {
+                        "item_no": i+1,
+                        "product_id": orderArray[i].id,
+                        "category": orderArray[i].category,
+                        "character": orderArray[i].character,
+                        "colour": orderArray[i].colour,
+                        "qty": orderArray[i].qty
+                    },
+                }
+            )
+        }
+
+        fetch("http://localhost:3001/basket", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data_body)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+    }
+
     //Iterates through orderArray to render individual orders with corresponding QuantityButtons
     let ordersDisplay = orderArray.map(orderItem => {
         const singular_category = (orderItem.category).slice(0, -1)
         const quantity_x_price = quantityTimesPrice(orderItem.qty, orderItem.price)
-
         return (
             <tr className="table_row">
                 <td className="checkout_product_details">
@@ -60,7 +89,6 @@ const CheckoutPage = ({ orderArray,
                         <QuantityButtons
                                 id={orderItem.id}
                                 image={orderItem.image}
-                                image_two={orderItem.image}
                                 character={orderItem.character}
                                 category={orderItem.category}
                                 price={orderItem.price}
@@ -128,8 +156,8 @@ const CheckoutPage = ({ orderArray,
                         <a className="keep_shopping_button" onClick={() => {setActiveCheckout(false)}}>
                             Keep Shopping
                         </a>
-                        <a className="pay_now_button">
-                            Pay Now
+                        <a className="pay_now_button" onClick={handleSubmitData}>
+                            Submit Order
                         </a>
                     </div>
                 </div>

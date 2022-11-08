@@ -66,7 +66,6 @@ const OrderCard = ({ orderArray,
                     <QuantityButtons
                         id={orderItem.id}
                         image={orderItem.image}
-                        image_two={orderItem.image}
                         character={orderItem.character}
                         category={orderItem.category}
                         price={orderItem.price}
